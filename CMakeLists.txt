@@ -16,4 +16,4 @@ SET(LIBFT_SRC libft/ft_atoi.c libft/ft_bzero.c libft/ft_isalnum.c libft/ft_isalp
         libft/ft_strrev.c libft/ft_strsplit.c libft/ft_strstr.c libft/ft_strsub.c libft/ft_strtrim.c libft/ft_tolower.c
         libft/ft_toupper.c libft/ft_wcount.c)
 
-add_executable(ft_printf ${LIBFT_SRC} ft_printf.c main.c ft_printf.h)
+add_executable(ft_printf ${LIBFT_SRC} ft_printf.c main.c ft_printf.h ft_itoa_base.c)

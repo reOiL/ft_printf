@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
+char	*ft_itoa_base(int value, int base);
 
 #endif //FILLIT_FT_PRINTF_H
