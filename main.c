@@ -10,7 +10,7 @@
 
 int main()
 {
-
+	printf("asdada");
 	printf("ft_printf\t\tout -> ");
 	printf("ft_printf\t\t=\t%i\n", ft_printf(PRINTF_STR, PRINTF_ARG));
 	printf("printf\t\t\tout -> ");
