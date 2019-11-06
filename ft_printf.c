@@ -31,14 +31,19 @@ int			get_format(va_list args, const char *str)
 	t_format	format;
 
 	i = 1;
+	if (str[i] == '%')//Если у нас
+	{
+		ft_putchar(str[i]);
+		return (2);
+	}
 	// format.flags = get_flags(&str[i], &i);
 	// Передадим значение i по адресу,
 	// чтобы мы могли его изменить прямо в функции
 	// (получить флаги и сдвинуть поинтер)
 
-	// format.width = get_width(&str[i], *i);
-	// format.precision = get_precision(&str[i], *i);
-	// format.modifier = get_modifier(&str[i], *i);
+	// format.width = get_width(&str[i], &i);
+	// format.precision = get_precision(&str[i], &i);
+	// format.modifier = get_modifier(&str[i], &i);
 	format.type = get_type(&str[i++]);
 
 	//Нужна какая то проверка, пока нет идей кроме как возвращать
@@ -57,17 +62,35 @@ int			get_format(va_list args, const char *str)
 int			ft_printf(const char *str, ...)
 {
 	int		i;
+	int		offset;
+	int		printed_count; // Подсчет символов, сколько в итоге напечатает printf, чтобы вернуть
 	va_list	args;
 
 	i = 0;
+	printed_count = 0;
 	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
-			i += get_format(args, &str[i]);
+		{
+			offset = get_format(args, &str[i]);
+			if (offset)//Если у нас get_format вернет 0, значит что то не так со спецификаторами
+			{
+				i += offset;
+				//printed_count += ???; видимо, его тоже  придется передавать по адресу в get_format...
+			}
+			else
+				{
+				ft_putchar(str[i++]);
+				printed_count++;
+			}
+		}
 		else
+		{
 			ft_putchar(str[i++]);
+			printed_count++;
+		}
 	}
 	va_end(args);
-	return (0);
+	return (printed_count);
 }
