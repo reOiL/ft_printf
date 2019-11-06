@@ -36,6 +36,8 @@ typedef struct	s_format
  * строке
 */
 
+char 			get_type(const char *str);
+
 int				ft_printf(const char *format, ...);
 
 #endif //FILLIT_FT_PRINTF_H

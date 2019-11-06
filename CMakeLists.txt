@@ -74,4 +74,4 @@ add_executable(git_printf
         ft_printf.c
         ft_printf.h
         main.c
-        modifier_functions.c)
+        get_format.c)

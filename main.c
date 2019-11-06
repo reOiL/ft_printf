@@ -4,15 +4,12 @@
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-#define PRINTF_STR "%i%d%d%s\n"
-#define PRINTF_ARG 1337, -1337, 0, "abc"
+#include <string.h>
 
 int main()
 {
-	printf("%d, %d , %d");
-	//printf("ft_printf\t\tout -> ");
-	//printf("ft_printf\t\t=\t%i\n", ft_printf(PRINTF_STR, PRINTF_ARG));
-	//printf("printf\t\t\tout -> ");
-	//printf("printf\t\t\t=\t%i\n", printf(PRINTF_STR, PRINTF_ARG));
+	char 	*str;
+
+	str = strdup("abcde");
+	ft_printf("%s", str);
 }
