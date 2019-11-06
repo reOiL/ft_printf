@@ -13,8 +13,6 @@
 #include "ft_printf.h"
 
 
-
-//
 void		print_value(t_format format, va_list args)
 {
 	//TODO после написания всех функций get_*, придумать, как все это выводить

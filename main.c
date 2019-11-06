@@ -9,7 +9,9 @@
 int main()
 {
 	char 	*str;
+	char 	c;
 
+	c = '1';
 	str = strdup("abcde");
-	ft_printf("%s", str);
+	ft_printf("abcde\n%c%s", c, str);
 }
