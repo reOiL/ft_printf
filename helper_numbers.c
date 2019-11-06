@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int 	count_digits(int value)
+int 	count_digits(long long int value)
 {
 	int		i;
 

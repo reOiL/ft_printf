@@ -76,4 +76,4 @@ add_executable(git_printf
         get_format.c
         helper_numbers.c
         main.c
-        print_numbers.c)
+        print_numbers.c print_ints_helper.c)

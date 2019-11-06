@@ -13,19 +13,34 @@
 #include "ft_printf.h"
 
 
-void		print_value(t_format format, va_list args)
+int			print_value(t_format format, va_list args)
 {
-	//TODO после написания всех функций get_*, придумать, как все это выводить
+	//TODO после написания всех функций get_*, придумать, как все это выводить.
+	//TODO Все еще проблема с получением количества выводимых символов. Хз, получится ли каждый раз передавать адрес printed_count //upd. попробую возвращать на этом этапе количество печатаемых символов
+	/* Разобраться с сhar и string, как самым простым
 	if (format.type == 'c')
-		ft_putchar(va_arg(args, int));
+		return(print_char(format, arg)s);
 	else if (format.type == 's')
-		ft_putstr(va_arg(args, char*));
+		return(print_string(format, args));
+	else if (format.type == 'p')
+		return(print_address(format, args));
 	else if (format.type == 'd' || format.type == 'i')
-		print_int(format, (va_arg(args, int)));
+		return(print_int(format, args));
+	else if (format.type == 'o')
+		return(print_oct(format, args));
+	else if (format.type == 'u')
+		return(print_unsigned(format, args));
+	else if (format.type == 'x')
+		return(print_low_hex(format, args));
+	else if (format.type == 'X')
+		return(print_high_hex(format, args));
+	else if (format.type == 'f')
+		return(print_float(format, args));
+	 */
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
-int			get_format(va_list args, const char *str)
+int			get_format(va_list args, const char *str, int *printed_count)
 {
 	int 		i;
 	t_format	format;
@@ -43,16 +58,17 @@ int			get_format(va_list args, const char *str)
 
 	format.width = get_width(&str[i], &i);
 	format.precision = get_precision(&str[i], &i);
-	// format.modifier = get_modifier(&str[i], &i);
+	format.modifier = get_modifier(&str[i], &i);
 	format.type = get_type(&str[i++]);
 
 	//Нужна какая то проверка, пока нет идей кроме как возвращать
 	//странные значение в параметры format, а потом в функции check_value их проверять,
 	//прежде чем отправлять печатать
 
+	//TODO check_value - разобраться с валидацией(совместимостью флагов и прочего со спецификаторами). Возвращать ноль при ошибках
 	//if (check_value(format))
 	//{
-		print_value(format, args);
+		*printed_count = print_value(format, args);
 		return (i);
 	//}
 	//else
@@ -73,14 +89,14 @@ int			ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			offset = get_format(args, &str[i]);
+			offset = get_format(args, &str[i], &printed_count);
 			if (offset)//Если у нас get_format вернет 0, значит что то не так со спецификаторами
 			{
 				i += offset;
 				//printed_count += ???; видимо, его тоже  придется передавать по адресу в get_format...
 			}
 			else
-				{
+			{
 				ft_putchar(str[i++]);
 				printed_count++;
 			}

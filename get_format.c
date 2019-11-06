@@ -43,3 +43,33 @@ int 	get_precision(const char *str, int *i)
 	}
 	return (precision);
 }
+
+int		get_modifier(const char *str, int *i)
+{
+	if (*str == 'l')
+	{
+		(*i)++;
+		if (*(++str) == 'l')
+		{
+			(*i)++;
+			return (3);
+		}
+		return (2);
+	}
+	else if (*str == 'h')
+	{
+		(*i)++;
+		if (*(++str) == 'h')
+		{
+			(*i)++;
+			return (4);
+		}
+		return (2);
+	}
+	else if (*str == 'L')
+	{
+		(*i)++;
+		return (5);
+	}
+	return (0);
+}
