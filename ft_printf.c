@@ -20,6 +20,8 @@ void		print_value(t_format format, va_list args)
 		ft_putchar(va_arg(args, int));
 	else if (format.type == 's')
 		ft_putstr(va_arg(args, char*));
+	else if (format.type == 'd' || format.type == 'i')
+		print_int(format, (va_arg(args, int)));
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
@@ -39,8 +41,8 @@ int			get_format(va_list args, const char *str)
 	// чтобы мы могли его изменить прямо в функции
 	// (получить флаги и сдвинуть поинтер)
 
-	// format.width = get_width(&str[i], &i);
-	// format.precision = get_precision(&str[i], &i);
+	format.width = get_width(&str[i], &i);
+	format.precision = get_precision(&str[i], &i);
 	// format.modifier = get_modifier(&str[i], &i);
 	format.type = get_type(&str[i++]);
 

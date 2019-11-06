@@ -16,6 +16,17 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
+/* Спецификаторы:
+ * c
+ * s
+ * p
+ * d
+ * i
+ * o
+ * x
+ * X
+ * f
+ */
 typedef struct	s_format
 {
 	int			flags[5];	// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1. 
@@ -36,8 +47,19 @@ typedef struct	s_format
  * строке
 */
 
+//helper_numbers.c
+int				count_digits(int value);
+
+//print_numbers.c
+void			print_int(t_format format, int value);
+
+//get_format.c
+int 			get_width(const char *str, int *i);
+int 			get_precision(const char *str, int *i);
 char 			get_type(const char *str);
 
+//ft_printf.c
+void			print_int(t_format format, int value);
 int				ft_printf(const char *format, ...);
 
 #endif //FILLIT_FT_PRINTF_H

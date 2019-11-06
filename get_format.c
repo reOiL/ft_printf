@@ -13,3 +13,33 @@ char 	get_type(const char *str)
 	else
 		return (0);
 }
+
+int 	get_width(const char *str, int *i)
+{
+	int 	width;
+
+	width = 0;
+	while (ft_isdigit(*str))
+	{
+		width = *str++ - '0' + width * 10;
+		(*i)++;
+	}
+	return (width);
+}
+
+int 	get_precision(const char *str, int *i)
+{
+	int 	precision;
+
+	precision = 0;
+	if (*str++ == '.')
+	{
+		(*i)++;
+		while (ft_isdigit(*str))
+		{
+			precision = *str++ - '0' + precision * 10;
+			(*i)++;
+		}
+	}
+	return (precision);
+}

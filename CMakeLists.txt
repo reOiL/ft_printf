@@ -73,5 +73,7 @@ add_executable(git_printf
         libft/libft.h
         ft_printf.c
         ft_printf.h
+        get_format.c
+        helper_numbers.c
         main.c
-        get_format.c)
+        print_numbers.c)

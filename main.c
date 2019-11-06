@@ -13,5 +13,11 @@ int main()
 
 	c = '1';
 	str = strdup("abcde");
-	ft_printf("abcde\n%c%s", c, str);
+
+	ft_printf("abcde%c   %s\n", c, str);
+	printf("abcde%c   %s\n", c, str);
+	ft_printf("%10.5d\n", 5);
+	printf("%10.5d\n", 5);
+	ft_printf("%0.0i\n", 9);
+	printf("%0.0i", 9);
 }
