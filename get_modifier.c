@@ -10,20 +10,25 @@ unsigned int get_modifier(const char *str, int *it)
     res = 0;
     if (str == NULL || it == NULL)
         return (0);
-    while (1)
+    if (ft_strcmp(str, "ll")  == 0)
     {
-        if (*str == 'l')
-            res |= MOD_L;
-        else if (ft_strcmp(str, "ll")  == 0)
-            res |= MOD_LL;
-        else if (ft_strcmp(str, "h")  == 0)
-            res |= MOD_H;
-        else if (ft_strcmp(str, "hh")  == 0)
-            res |= MOD_HH;
-        else
-            break;
-        (*it)++;
-        str++;
+        res = MOD_LL;
+        (*it) += 2;
+    }
+    else if (ft_strcmp(str, "l")  == 0)
+    {
+        res = MOD_L;
+        (*it) += 1;
+    }
+    else if (ft_strcmp(str, "h")  == 0)
+    {
+        res = MOD_H;
+        (*it) += 1;
+    }
+    else if (ft_strcmp(str, "hh")  == 0)
+    {
+        res = MOD_HH;
+        (*it) += 2;
     }
     return (res);
 }
