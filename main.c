@@ -4,13 +4,14 @@
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-#define PRINTF_STR "%i%d%d%s\n"
-#define PRINTF_ARG 1337, -1337, 0, "abc"
+#include <string.h>
 
 int main()
 {
+	char 	*str;
+	char 	c;
 
-	ft_printf(PRINTF_STR, PRINTF_ARG);
-	printf(PRINTF_STR, PRINTF_ARG);
+	c = '1';
+	str = strdup("abcde");
+	ft_printf("abcde\n%c%s", c, str);
 }

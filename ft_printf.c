@@ -12,39 +12,83 @@
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
-{
-	size_t	szTotalLen;
-	char 	*tmp;
-	va_list	ap;
 
-	szTotalLen = ft_strlen(format);
-	va_start(ap, format);
-	tmp = NULL;
-	while (*format)
+void		print_value(t_format format, va_list args)
+{
+	//TODO после написания всех функций get_*, придумать, как все это выводить
+	if (format.type == 'c')
+		ft_putchar(va_arg(args, int));
+	else if (format.type == 's')
+		ft_putstr(va_arg(args, char*));
+}
+
+// get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
+int			get_format(va_list args, const char *str)
+{
+	int 		i;
+	t_format	format;
+
+	i = 1;
+	if (str[i] == '%')//Если у нас
 	{
-		if (*format != '%')
-		{
-			ft_putchar(*format);
-			format++;
-			continue;
-		}
-		format++;
-		if (*format == 'd' || *format == 'i')
-			tmp = ft_itoa_base(va_arg(ap, int), 10);
-		else if (*format == 'x' || *format == 'X')
-			tmp = ft_itoa_base(va_arg(ap, int), 16);
-		else if (*format == 's')
-			tmp = va_arg(ap, char*);
-		if (tmp)
-		{
-			szTotalLen += ft_strlen(tmp);
-			ft_putstr(tmp);
-			if (*format != 's')
-				ft_memdel((void**)&tmp);
-		}
-		format++;
+		ft_putchar(str[i]);
+		return (2);
 	}
-	va_end(ap);
-	return (0);
+	// format.flags = get_flags(&str[i], &i);
+	// Передадим значение i по адресу,
+	// чтобы мы могли его изменить прямо в функции
+	// (получить флаги и сдвинуть поинтер)
+
+	// format.width = get_width(&str[i], &i);
+	// format.precision = get_precision(&str[i], &i);
+	// format.modifier = get_modifier(&str[i], &i);
+	format.type = get_type(&str[i++]);
+
+	//Нужна какая то проверка, пока нет идей кроме как возвращать
+	//странные значение в параметры format, а потом в функции check_value их проверять,
+	//прежде чем отправлять печатать
+
+	//if (check_value(format))
+	//{
+		print_value(format, args);
+		return (i);
+	//}
+	//else
+	//	return (0);
+}
+
+int			ft_printf(const char *str, ...)
+{
+	int		i;
+	int		offset;
+	int		printed_count; // Подсчет символов, сколько в итоге напечатает printf, чтобы вернуть
+	va_list	args;
+
+	i = 0;
+	printed_count = 0;
+	va_start(args, str);
+	while (str[i])
+	{
+		if (str[i] == '%')
+		{
+			offset = get_format(args, &str[i]);
+			if (offset)//Если у нас get_format вернет 0, значит что то не так со спецификаторами
+			{
+				i += offset;
+				//printed_count += ???; видимо, его тоже  придется передавать по адресу в get_format...
+			}
+			else
+				{
+				ft_putchar(str[i++]);
+				printed_count++;
+			}
+		}
+		else
+		{
+			ft_putchar(str[i++]);
+			printed_count++;
+		}
+	}
+	va_end(args);
+	return (printed_count);
 }
