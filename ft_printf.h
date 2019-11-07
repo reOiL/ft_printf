@@ -59,4 +59,6 @@ int				ft_printf(const char *format, ...);
 unsigned int    get_flags(const char *str, int *it);
 
 unsigned int    get_modifier(const char *str, int *it);
+
+int				print_float(t_format format, va_list args);
 #endif //FILLIT_FT_PRINTF_H
