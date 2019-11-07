@@ -34,7 +34,7 @@ int			get_format(va_list args, const char *str)
 		ft_putchar(str[i]);
 		return (2);
 	}
-	// format.flags = get_flags(&str[i], &i);
+	format.flags = get_flags(&str[i], &i);
 	// Передадим значение i по адресу,
 	// чтобы мы могли его изменить прямо в функции
 	// (получить флаги и сдвинуть поинтер)

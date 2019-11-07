@@ -8,10 +8,12 @@
 
 int main()
 {
-	char 	*str;
-	char 	c;
+	//char 	*str;
+	//char 	c;
 
-	c = '1';
-	str = strdup("abcde");
-	ft_printf("abcde\n%c%s", c, str);
+	//c = '1';
+	//str = strdup("abcde");
+	//ft_printf("abcde\n%c%s", c, str);
+    int d1=123, d2=42, d3=1543;
+    ft_printf("%#d", 1337);
 }

@@ -18,14 +18,14 @@
 
 # define FLAG_ZERO 0x2
 # define FLAG_SHARP 0x4
-# define FLAG_PLUS 0x10
-# define FLAG_MINUS 0x20
-# define FLAG_SPACE 0x40
+# define FLAG_PLUS 0x8
+# define FLAG_MINUS 0x10
+# define FLAG_SPACE 0x20
 
 # define MOD_L 0x2
 # define MOD_LL 0x4
-# define MOD_H 0x10
-# define MOD_HH 0x20
+# define MOD_H 0x8
+# define MOD_HH 0x10
 
 typedef struct	s_format
 {
@@ -33,13 +33,13 @@ typedef struct	s_format
     // Пример: если стоит флаг 0 и флаг -, то в битовом виде мы получим:
     // 100010 это получается за счёт логического или (0x2 | 0x20 = 0x22)
     // Чтобы проверить есть ли этот флаг, надо просто выполнить операцию и (0x22|0x20 = 0x20)
-	int			flags;  	// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
+    unsigned int flags;  	// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
 							// При нахождении флага после % соответсвующее значение установится в 1
 							// (Но некоторые флаги несовместимы, с этим надо подумать.)
 	int			width;		// Ширина поля
 	int			precision;	// Точность. Мб при отсутсвии значений точности и ширины, можно их инициализировать как -1?
 	// Тоже самое что и с флагами
-	int			modifier;   // Модификаторы (l, h, ll, hh)(или все таки char[2]?)
+    unsigned int modifier;   // Модификаторы (l, h, ll, hh)(или все таки char[2]?)
 	char		type;		// Тип преобразования.(или int)
 	void		*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
 }				t_format;
@@ -56,4 +56,7 @@ char 			get_type(const char *str);
 
 int				ft_printf(const char *format, ...);
 
+unsigned int    get_flags(const char *str, int *it);
+
+unsigned int    get_modifier(const char *str, int *it);
 #endif //FILLIT_FT_PRINTF_H
