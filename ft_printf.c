@@ -12,18 +12,18 @@
 
 #include "ft_printf.h"
 
-
 int			print_value(t_format format, va_list args)
 {
 	//TODO после написания всех функций get_*, придумать, как все это выводить.
 	//TODO Все еще проблема с получением количества выводимых символов. Хз, получится ли каждый раз передавать адрес printed_count //upd. попробую возвращать на этом этапе количество печатаемых символов
-	/* Разобраться с сhar и string, как самым простым
+	// Разобраться с сhar и string, как самым простым
 	if (format.type == 'c')
-		return(print_char(format, arg)s);
-	else if (format.type == 's')
-		return(print_string(format, args));
+		return(print_char(format, args));
+	//else if (format.type == 's')
+	//	return(print_string(format, args));
 	else if (format.type == 'p')
 		return(print_address(format, args));
+	/*
 	else if (format.type == 'd' || format.type == 'i')
 		return(print_int(format, args));
 	else if (format.type == 'o')
@@ -51,7 +51,7 @@ int			get_format(va_list args, const char *str, int *printed_count)
 		ft_putchar(str[i]);
 		return (2);
 	}
-	// format.flags = get_flags(&str[i], &i);
+	format.flags = get_flags(&str[i], &i);
 	// Передадим значение i по адресу,
 	// чтобы мы могли его изменить прямо в функции
 	// (получить флаги и сдвинуть поинтер)

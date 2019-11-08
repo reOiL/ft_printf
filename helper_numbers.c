@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 
+//TODO Возможно нужен еще подсчет для 16 и 8
 int 	count_digits(long long int value)
 {
 	int		i;
