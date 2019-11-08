@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
+# include "floating.h"
 
 # define FLAG_ZERO 0x2
 # define FLAG_SHARP 0x4
@@ -52,6 +53,13 @@ typedef struct	s_format
  * строке
 */
 
+typedef union   u_floating{
+    float       f;
+    int         i;
+    double      f64;
+    long long   i64;
+}               t_ufloating;
+
 char 			get_type(const char *str);
 
 int				ft_printf(const char *format, ...);
@@ -61,4 +69,6 @@ unsigned int    get_flags(const char *str, int *it);
 unsigned int    get_modifier(const char *str, int *it);
 
 int				print_float(t_format format, va_list args);
+
+t_floating      parse_float(float val);
 #endif //FILLIT_FT_PRINTF_H
