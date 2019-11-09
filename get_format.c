@@ -64,7 +64,7 @@ int 	get_precision(const char *str, int *i)
 		(*i)++;
 		while (ft_isdigit(*str))
 		{
-			precision = precision == -1 ? *str - '0' : *str - '0' * precision * 10;
+			precision = precision == -1 ? *str - '0' : (*str - '0') + precision * 10;
 			str++;
 			(*i)++;
 		}

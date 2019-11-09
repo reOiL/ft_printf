@@ -38,17 +38,24 @@
  * X -
  * f -
  */
-typedef struct	s_format
+
+typedef union   		u_integers
 {
-	unsigned int	flags;	// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
-							// При нахождении флага после % соответсвующее значение установится в 1
-							// (Но некоторые флаги несовместимы, с этим надо подумать.)
-	int				width;		// Ширина поля
-	int				precision;	// Точность.
-	int				modifier;	// Модификаторы (l, h, ll, hh, L)(пока хз как лучше это сделать), возвращаемое значение указывает на модификатор, без = 0, l = 1, h = 2, ll = 3, hh = 4, L = 5
-	char			type;		// Тип преобразования.(или int)
-	//void			*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
-}					t_format;
+	long long           ll;
+	unsigned long long  ull;
+}               		t_integers;
+
+typedef struct			s_format
+{
+	unsigned int		flags;		// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
+									// При нахождении флага после % соответсвующее значение установится в 1
+									// (Но некоторые флаги несовместимы, с этим надо подумать.)
+	int					width;		// Ширина поля
+	int					precision;	// Точность.
+	int					modifier;	// Модификаторы (l, h, ll, hh, L)(пока хз как лучше это сделать), возвращаемое значение указывает на модификатор, без = 0, l = 1, h = 2, ll = 3, hh = 4, L = 5
+	char				type;		// Тип преобразования.(или int)
+	//void				*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
+}						t_format;
 
 /*
  * Примерно план такой - двигаем указатель по данной строке и печатаем символы, при встрече 
@@ -60,7 +67,19 @@ typedef struct	s_format
 //print_char_helper.c
 int				print_char(t_format format, va_list args);
 int				print_string(t_format format, va_list args);
+
+//print_addr_helper.c
+long long		ft_max(long long a, long long b);
+char 			*get_addr_precision(char *num, int precision);
+int 			ft_putstr_size(char *str, int precision);
 int 			print_address(t_format format, va_list args);
+
+//ft_itoa_base.c
+int				calc_len(long long val, int base);
+char			cast_base(unsigned short val);
+void			itoa_2(char **array, long long val, int base, long long index);
+char			*ft_itoa_base(t_integers value, int base);
+int             put_nbr_base(t_integers val, t_format format, int base);
 
 //helper_numbers.c
 int				count_digits(long long int value);
@@ -69,11 +88,11 @@ int				count_digits(long long int value);
 int				print_int(t_format format, va_list args);
 
 //print_ints_helper.c
-int				print_normal_int(t_format format, int value);		//format.modifier = 0
-int				print_long_int(t_format format, long int value);			//format.modifier = 1 (l)
-int				print_short_int(t_format format, short int value);		//format.modifier = 2 (h)
-int				print_long_long_int(t_format format, long long int value);	//format.modifier = 3 (ll)
-int				print_signed_char_int(t_format format, char value);	//format.modifier = 4 (hh)
+int				print_normal_int(t_format format, int value);				//format.modifier = 0
+int				print_long_int(t_format format, long int value);			//format.modifier = 2 (l)
+int				print_long_long_int(t_format format, long long int value);	//format.modifier = 8 (ll)
+int				print_short_int(t_format format, short int value);			//format.modifier = 4 lh)
+int				print_signed_char_int(t_format format, char value);			//format.modifier = 16 (hh)
 
 //get_format.c
 unsigned int 	get_flags(const char *str, int *it);

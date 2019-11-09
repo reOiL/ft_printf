@@ -36,7 +36,7 @@ int			print_value(t_format format, va_list args)
 		return(print_high_hex(format, args));
 	else if (format.type == 'f')
 		return(print_float(format, args));
-	 */
+	*/
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
@@ -91,10 +91,7 @@ int			ft_printf(const char *str, ...)
 		{
 			offset = get_format(args, &str[i], &printed_count);
 			if (offset)//Если у нас get_format вернет 0, значит что то не так со спецификаторами
-			{
 				i += offset;
-				//printed_count += ???; видимо, его тоже  придется передавать по адресу в get_format...
-			}
 			else
 			{
 				ft_putchar(str[i++]);

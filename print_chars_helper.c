@@ -2,15 +2,17 @@
 
 int 		ft_putstr_size(char *str, int precision)
 {
-	int length;
+	int 	i;
+	int 	length;
 
+	i = 0;
 	length = 0;
-	while (*str && precision--)
+	while (str[i] && precision--)
 	{
-		ft_putchar(*str);
+		ft_putchar(str[i++]);
 		length++;
-		str++;
 	}
+	free(str);
 	return (length);
 }
 
@@ -55,20 +57,5 @@ int				print_string(t_format format, va_list args)
 			ft_putchar(' ');
 		length = ft_putstr_size(str, format.precision);
 	}
-	free(str);
 	return ((int)(length > format.width ? length : format.width));
-}
-
-//TODO atoi_base16 добавить (и формат x X) Аналогично с сhar, применяется только флаг '-'
-int 		print_address(t_format format, va_list args)
-{
-	long long unsigned n;
-
-	/*
-	ft_putstr("0x");
-	n = va_arg(args, long long unsigned);
-	if (n / 16 != 0)
-		ft_putnbr_long_long(n / 10, 0);
-	ft_putchar('0' + n % 10);
-	 */
 }
