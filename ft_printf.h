@@ -75,10 +75,8 @@ int 			ft_putstr_size(char *str, int precision);
 int 			print_address(t_format format, va_list args);
 
 //ft_itoa_base.c
-int				calc_len(long long val, int base);
 char			cast_base(unsigned short val);
-void			itoa_2(char **array, long long val, int base, long long index);
-char			*ft_itoa_base(t_integers value, int base);
+char            *ft_itoa_base(unsigned long long value, int base);
 int             put_nbr_base(t_integers val, t_format format, int base);
 
 //helper_numbers.c
@@ -86,6 +84,7 @@ int				count_digits(long long int value);
 
 //print_numbers.c
 int				print_int(t_format format, va_list args);
+int             print_int_unsigned(t_format format, va_list args);
 
 //print_ints_helper.c
 int				print_normal_int(t_format format, int value);				//format.modifier = 0

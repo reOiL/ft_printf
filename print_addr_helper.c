@@ -39,7 +39,7 @@ int 		print_address(t_format format, va_list args)
 
 	width = format.width;
 	n.ull = va_arg(args, unsigned long long);
-	num = ft_itoa_base(n, 16);
+	num = ft_itoa_base(n.ull, 16);
 	if (format.flags & FLAG_MINUS)
 	{
 		num = get_addr_precision(str_tolower(num), format.precision);

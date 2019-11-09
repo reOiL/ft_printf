@@ -23,20 +23,16 @@ int			print_value(t_format format, va_list args)
 		return(print_string(format, args));
 	else if (format.type == 'p')
 		return(print_address(format, args));
-	/*
 	else if (format.type == 'd' || format.type == 'i')
 		return(print_int(format, args));
-	else if (format.type == 'o')
-		return(print_oct(format, args));
-	else if (format.type == 'u')
-		return(print_unsigned(format, args));
-	else if (format.type == 'x')
-		return(print_low_hex(format, args));
-	else if (format.type == 'X')
-		return(print_high_hex(format, args));
+	else if(format.type == 'o' || format.type == 'u' ||
+            format.type == 'x' || format.type == 'X')
+        return(print_int_unsigned(format, args));
+	/*
 	else if (format.type == 'f')
 		return(print_float(format, args));
 	*/
+	return (0);
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
