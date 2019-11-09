@@ -28,8 +28,8 @@
 # define MOD_HH 0x10
 
 /* Спецификаторы:
- * c +-
- * s -
+ * c +
+ * s +
  * p -
  * d -
  * i -
@@ -59,6 +59,7 @@ typedef struct	s_format
 */
 //print_char_helper.c
 int				print_char(t_format format, va_list args);
+int				print_string(t_format format, va_list args);
 int 			print_address(t_format format, va_list args);
 
 //helper_numbers.c
@@ -91,9 +92,6 @@ int				get_format(va_list args, const char *str, int *printed_count);
 int				ft_printf(const char *format, ...);
 
 //Не реализованы
-//int				print_char(t_format format, va_list args);
-int				print_string(t_format format, va_list args);
-//int				print_address(t_format format, va_list args);
 int				print_oct(t_format format, va_list args);
 int				print_unsigned(t_format format, va_list args);
 int				print_low_hex(t_format format, va_list args);

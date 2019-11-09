@@ -19,8 +19,8 @@ int			print_value(t_format format, va_list args)
 	// Разобраться с сhar и string, как самым простым
 	if (format.type == 'c')
 		return(print_char(format, args));
-	//else if (format.type == 's')
-	//	return(print_string(format, args));
+	else if (format.type == 's')
+		return(print_string(format, args));
 	else if (format.type == 'p')
 		return(print_address(format, args));
 	/*
@@ -68,7 +68,7 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	//TODO check_value - разобраться с валидацией(совместимостью флагов и прочего со спецификаторами). Возвращать ноль при ошибках
 	//if (check_value(format))
 	//{
-		*printed_count = print_value(format, args);
+		*printed_count += print_value(format, args);
 		return (i);
 	//}
 	//else
