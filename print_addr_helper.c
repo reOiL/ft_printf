@@ -50,7 +50,7 @@ int 		print_address(t_format format, va_list args)
 	else
 	{
 		num = get_addr_precision(str_tolower(num), format.precision);
-		while (width-- > ft_max(ft_strlen(num), format.precision + 2))
+		while (width-- > ft_max(ft_strlen(num), format.precision) + 2)
 			ft_putchar(' ');
 		length = ft_putstr_size(num, ft_strlen(num));
 	}
