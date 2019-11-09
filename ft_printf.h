@@ -60,6 +60,12 @@ typedef union   u_floating{
     long long   i64;
 }               t_ufloating;
 
+typedef union   u_integers
+{
+    long long           ll;
+    unsigned long long  ull;
+}               t_integers;
+
 char 			get_type(const char *str);
 
 int				ft_printf(const char *format, ...);
@@ -71,4 +77,6 @@ unsigned int    get_modifier(const char *str, int *it);
 int				print_float(t_format format, va_list args);
 
 t_floating      parse_float(float val);
+
+int             put_nbr_base(t_integers val, t_format format, int base);
 #endif //FILLIT_FT_PRINTF_H

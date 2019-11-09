@@ -71,6 +71,7 @@ add_executable(git_printf
         libft/ft_toupper.c
         libft/ft_wcount.c
         libft/libft.h
+        ft_itoa_base.c
         ft_printf.c
         ft_printf.h
         main.c

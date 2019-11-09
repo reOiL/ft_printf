@@ -27,6 +27,12 @@ int main()
 	//ft_printf("abcde\n%c%s", c, str);
     //int d1=123, d2=42, d3=1543;
     //ft_printf("%#d", 1337);
+    t_format abc;
+    t_integers i;
+    i.ll = 15;
+    put_nbr_base(i, abc, 10);
+    put_nbr_base(i, abc, 16);
+    /*
     parse_float(1E+37f);
     parse_float(0.15625f);
     parse_float(5.f);
@@ -59,4 +65,5 @@ int main()
 
     printf("%f\n", 1E+37);
     dummy("%f", 1E+37);
+     */
 }
