@@ -29,9 +29,22 @@ int main()
     //ft_printf("%#d", 1337);
     t_format abc;
     t_integers i;
-    i.ll = 15;
+    i.ull = 18446744073709551615 ;
+    abc.type = 'u';
     put_nbr_base(i, abc, 10);
+    ft_putendl("");
     put_nbr_base(i, abc, 16);
+    i.ull = 1;
+    ft_putendl("");
+    put_nbr_base(i, abc, 10);
+    ft_putendl("");
+    i.ull = 0;
+    put_nbr_base(i, abc, 10);
+    ft_putendl("");
+    i.ll = -9223372036854775808;
+    abc.type = '\0';
+    put_nbr_base(i, abc, 10);
+    ft_putendl("");
     /*
     parse_float(1E+37f);
     parse_float(0.15625f);
