@@ -29,10 +29,15 @@ int main()
     //ft_printf("%#d", 1337);
     t_format abc;
     t_integers i;
-    i.ull = 18446744073709551615 ;
-    abc.type = 'u';
-    put_nbr_base(i, abc, 10);
+    i.ll = 9223372036854775807 ;
+    abc.type = 'x';
+    abc.flags = FLAG_SHARP;
+    abc.precision = 0;
+    int a = put_nbr_base(i, abc, 16);
     ft_putendl("");
+    int b = printf("%#llx\n", i.ll);
+    printf("my = %i\norig = %i", a, b - 1);
+    /*
     put_nbr_base(i, abc, 16);
     i.ull = 1;
     ft_putendl("");
@@ -45,6 +50,7 @@ int main()
     abc.type = '\0';
     put_nbr_base(i, abc, 10);
     ft_putendl("");
+     */
     /*
     parse_float(1E+37f);
     parse_float(0.15625f);

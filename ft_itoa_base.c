@@ -55,23 +55,61 @@ char	*ft_itoa_base(unsigned long long value, int base)
 	return array;
 }
 
+int        put_char_count(char c, int count)
+{
+    int i;
+
+    i = 0;
+    while (count > 0)
+    {
+        ft_putchar(c);
+        i++;
+        count--;
+    }
+    return (i);
+}
+
+void    to_lower(char *str)
+{
+    while (*str)
+    {
+        if (*str > 'A' && *str < 'Z')
+            *str += 32;
+        str++;
+    }
+}
+
 int             put_nbr_base(t_integers val, t_format format, int base)
 {
     char *tmp;
     size_t len;
     int     is_minus;
+    char*    spec;
 
     is_minus = 0;
+    spec = "\0";
     if (val.ll < 0 && format.type != 'u')
     {
         is_minus += 1;
         val.ull = -val.ll;
     }
     tmp = ft_itoa_base(val.ull, base);
-    len = ft_strlen(tmp) + is_minus;
+    if (format.type == 'x')
+        to_lower(tmp);
+    len = ft_strlen(tmp);
     if(is_minus)
-        ft_putchar('-');
+        spec = "-";
+    else if (format.flags & FLAG_SHARP)
+        spec = "0x";
+    else if (format.flags & FLAG_PLUS)
+        spec = "+";
+    else if(format.flags & FLAG_SPACE)
+        spec = " ";
+    if (spec[0])
+        ft_putstr(spec);
+    if (format.flags & FLAG_ZERO || format.precision > 0)
+        len += put_char_count('0', format.precision - len);
     ft_putstr(tmp);
     ft_strdel(&tmp);
-    return (len);
+    return (len + ft_strlen(spec));
 }
