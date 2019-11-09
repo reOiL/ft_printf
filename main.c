@@ -12,6 +12,8 @@
 
 void test()
 {
+    int a, b, c;
+
     PRINTF_TEST("%d\n", 1337);
     PRINTF_TEST("%d\n", 1);
     PRINTF_TEST("%d\n", 0);
@@ -40,15 +42,55 @@ void test()
     PRINTF_TEST("%X\n", 0);
     PRINTF_TEST("%X\n", 324234);
     PRINTF_TEST("%X\n", -1);
+    // flag # test
     PRINTF_TEST("%#X\n", 1);
     PRINTF_TEST("%#X\n", 0);
     PRINTF_TEST("%#X\n", 324234);
     PRINTF_TEST("%#X\n", -1);
+    PRINTF_TEST("%#x\n", 1);
+    PRINTF_TEST("%#x\n", 0);
+    PRINTF_TEST("%#x\n", 324234);
     PRINTF_TEST("%#x\n", -1);
-    PRINTF_TEST("%#X\n", 1);
-    PRINTF_TEST("%#X\n", 0);
-    PRINTF_TEST("%#X\n", 324234);
-    PRINTF_TEST("%#X\n", -1);
+    // Flag + test
+    PRINTF_TEST("%+d\n", 1337);
+    PRINTF_TEST("%+d\n", 1);
+    PRINTF_TEST("%+d\n", 0);
+    PRINTF_TEST("%+d\n", -1);
+    PRINTF_TEST("%+d\n", 2147483647);
+    PRINTF_TEST("%+d\n", -2147483648);
+    // flag space test
+    PRINTF_TEST("% d\n", 1337);
+    PRINTF_TEST("% d\n", 1);
+    PRINTF_TEST("% d\n", 0);
+    PRINTF_TEST("% d\n", -1);
+    PRINTF_TEST("% d\n", 2147483647);
+    PRINTF_TEST("% d\n", -2147483648);
+    PRINTF_TEST("%+u\n", 1);
+    PRINTF_TEST("%+u\n", 0);
+    PRINTF_TEST("%+u\n", 324234);
+    PRINTF_TEST("%+u\n", -1);
+    PRINTF_TEST("%+#x\n", 1);
+    PRINTF_TEST("%+#x\n", 0);
+    PRINTF_TEST("%+#x\n", 324234);
+    PRINTF_TEST("%+#x\n", -1);
+    PRINTF_TEST("% u\n", 1);
+    PRINTF_TEST("% u\n", 0);
+    PRINTF_TEST("% u\n", 324234);
+    PRINTF_TEST("% u\n", -1);
+    PRINTF_TEST("% #x\n", 1);
+    PRINTF_TEST("% #x\n", 0);
+    PRINTF_TEST("% #x\n", 324234);
+    PRINTF_TEST("% #x\n", -1);
+    PRINTF_TEST("%p\n", &a);
+    PRINTF_TEST("%p\n", &b);
+    PRINTF_TEST("%p\n", &c);
+    PRINTF_TEST("%s\n", "abc abc abc");
+    PRINTF_TEST("%s\n", "");
+    PRINTF_TEST("%s\n", "123");
+    PRINTF_TEST("%0.20d\n", 1337);
+    PRINTF_TEST("%0.2d\n", 1337);
+    PRINTF_TEST("%0.1d\n", 1337);
+    PRINTF_TEST("%0.100d\n", 1337);
 }
 
 int main()

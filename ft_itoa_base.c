@@ -97,13 +97,14 @@ int             put_nbr_base(t_integers val, t_format format, int base)
     if (format.type == 'x')
         to_lower(tmp);
     len = ft_strlen(tmp);
-    if(is_minus)
+    //TODO: maybe make type like flags by bits?
+    if(is_minus && (format.type == 'd' || format.type == 'i'))
         spec = "-";
     else if (format.flags & FLAG_SHARP && val.ull != 0)
         spec = "0x";
-    else if (format.flags & FLAG_PLUS)
+    else if (format.flags & FLAG_PLUS && (format.type == 'd' || format.type == 'i'))
         spec = "+";
-    else if(format.flags & FLAG_SPACE)
+    else if (format.flags & FLAG_SPACE && (format.type == 'd' || format.type == 'i'))
         spec = " ";
     if (spec[0])
         ft_putstr(spec);
