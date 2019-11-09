@@ -15,7 +15,6 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
-# include "floating.h"
 
 # define FLAG_ZERO 0x2
 # define FLAG_SHARP 0x4
@@ -28,22 +27,35 @@
 # define MOD_H 0x8
 # define MOD_HH 0x10
 
-typedef struct	s_format
+/* Спецификаторы:
+ * c +
+ * s +
+ * p -
+ * d -
+ * i -
+ * o -
+ * x -
+ * X -
+ * f -
+ */
+
+typedef union   		u_integers
 {
-    // Битывые операции, тип данных лучше взять меньше, например short
-    // Пример: если стоит флаг 0 и флаг -, то в битовом виде мы получим:
-    // 100010 это получается за счёт логического или (0x2 | 0x20 = 0x22)
-    // Чтобы проверить есть ли этот флаг, надо просто выполнить операцию и (0x22|0x20 = 0x20)
-    unsigned int flags;  	// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
-							// При нахождении флага после % соответсвующее значение установится в 1
-							// (Но некоторые флаги несовместимы, с этим надо подумать.)
-	int			width;		// Ширина поля
-	int			precision;	// Точность. Мб при отсутсвии значений точности и ширины, можно их инициализировать как -1?
-	// Тоже самое что и с флагами
-    unsigned int modifier;   // Модификаторы (l, h, ll, hh)(или все таки char[2]?)
-	char		type;		// Тип преобразования.(или int)
-	void		*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
-}				t_format;
+	long long           ll;
+	unsigned long long  ull;
+}               		t_integers;
+
+typedef struct			s_format
+{
+	unsigned int		flags;		// 5 флагов (0,#,+,-, ), значение каждого элемента массива - 0 или 1.
+									// При нахождении флага после % соответсвующее значение установится в 1
+									// (Но некоторые флаги несовместимы, с этим надо подумать.)
+	int					width;		// Ширина поля
+	int					precision;	// Точность.
+	int					modifier;	// Модификаторы (l, h, ll, hh, L)(пока хз как лучше это сделать), возвращаемое значение указывает на модификатор, без = 0, l = 1, h = 2, ll = 3, hh = 4, L = 5
+	char				type;		// Тип преобразования.(или int)
+	//void				*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
+}						t_format;
 
 /*
  * Примерно план такой - двигаем указатель по данной строке и печатаем символы, при встрече 
@@ -52,31 +64,57 @@ typedef struct	s_format
  * после % функция будет возвращать 0, что будет означать печать тех символов, что есть в 
  * строке
 */
+//print_char_helper.c
+int				print_char(t_format format, va_list args);
+int				print_string(t_format format, va_list args);
 
-typedef union   u_floating{
-    float       f;
-    int         i;
-    double      f64;
-    long long   i64;
-}               t_ufloating;
+//print_addr_helper.c
+long long		ft_max(long long a, long long b);
+char 			*get_addr_precision(char *num, int precision);
+int 			ft_putstr_size(char *str, int precision);
+int 			print_address(t_format format, va_list args);
 
-typedef union   u_integers
-{
-    long long           ll;
-    unsigned long long  ull;
-}               t_integers;
+//ft_itoa_base.c
+int				calc_len(long long val, int base);
+char			cast_base(unsigned short val);
+void			itoa_2(char **array, long long val, int base, long long index);
+char			*ft_itoa_base(t_integers value, int base);
+int             put_nbr_base(t_integers val, t_format format, int base);
 
+//helper_numbers.c
+int				count_digits(long long int value);
+
+//print_numbers.c
+int				print_int(t_format format, va_list args);
+
+//print_ints_helper.c
+int				print_normal_int(t_format format, int value);				//format.modifier = 0
+int				print_long_int(t_format format, long int value);			//format.modifier = 2 (l)
+int				print_long_long_int(t_format format, long long int value);	//format.modifier = 8 (ll)
+int				print_short_int(t_format format, short int value);			//format.modifier = 4 lh)
+int				print_signed_char_int(t_format format, char value);			//format.modifier = 16 (hh)
+
+//get_format.c
+unsigned int 	get_flags(const char *str, int *it);
+int 			get_width(const char *str, int *i);
+int 			get_precision(const char *str, int *i);
+int				get_modifier(const char *str, int *i);
 char 			get_type(const char *str);
 
+//ft_putnbr_long_long.c
+int				ft_putnbr_long_long(long long int n, int count);
+int				ft_putnbr_unsigned(long long unsigned int n, int count);
+
+//ft_printf.c
+int				print_value(t_format format, va_list args);
+int				get_format(va_list args, const char *str, int *printed_count);
 int				ft_printf(const char *format, ...);
 
-unsigned int    get_flags(const char *str, int *it);
-
-unsigned int    get_modifier(const char *str, int *it);
-
+//Не реализованы
+int				print_oct(t_format format, va_list args);
+int				print_unsigned(t_format format, va_list args);
+int				print_low_hex(t_format format, va_list args);
+int				print_high_hex(t_format format, va_list args);
 int				print_float(t_format format, va_list args);
 
-t_floating      parse_float(float val);
-
-int             put_nbr_base(t_integers val, t_format format, int base);
-#endif //FILLIT_FT_PRINTF_H
+#endif //FT_PRINTF_H

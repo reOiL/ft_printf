@@ -74,5 +74,11 @@ add_executable(git_printf
         ft_itoa_base.c
         ft_printf.c
         ft_printf.h
+        ft_putnbr_longlong.c
+        get_format.c
+        helper_numbers.c
         main.c
-        get_format.c get_flags.c get_modifier.c print_float.c floating.h)
+        print_addr_helper.c
+        print_chars_helper.c
+        print_ints_helper.c
+        print_numbers.c)
