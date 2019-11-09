@@ -108,13 +108,15 @@ int             put_nbr_base(t_integers val, t_format format, int base)
         spec = " ";
     if (spec[0])
         ft_putstr(spec);
+    if(!(format.flags & FLAG_MINUS) && format.width > 0)
+        put_char_count(' ', format.width - ((format.precision > 0 ? format.precision : len)));
     if (format.flags & FLAG_ZERO || format.precision > 0)
         len += put_char_count('0', format.precision - len);
-    else if(!(format.flags & FLAG_MINUS) && format.width > 0)
-        len += put_char_count(' ', format.width - len);
     ft_putstr(tmp);
     if ((format.flags & FLAG_MINUS) && format.width > 0)
-        len += put_char_count(' ', format.width - len);
+        put_char_count(' ', format.width - len);
+    if (format.width > 0 && format.width > len)
+        len += format.width - len;
     ft_strdel(&tmp);
     return (len + ft_strlen(spec));
 }

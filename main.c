@@ -96,6 +96,7 @@ void test()
     PRINTF_TEST("%10d\n", 1337);
     PRINTF_TEST("%-3d\n", 1337);
     PRINTF_TEST("%-3d\n", 1337);
+    PRINTF_TEST("%30.20d\n", 1337);
 }
 
 int main()
