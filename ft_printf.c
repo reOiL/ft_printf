@@ -32,7 +32,7 @@ int			print_value(t_format format, va_list args)
 	else if (format.type == 'f')
 		return(print_float(format, args));
 	*/
-	return (0);
+	return (-1);
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
@@ -40,6 +40,7 @@ int			get_format(va_list args, const char *str, int *printed_count)
 {
 	int 		i;
 	t_format	format;
+    int         tmp;
 
 	i = 1;
 	if (str[i] == '%')//Если у нас
@@ -64,7 +65,10 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	//TODO check_value - разобраться с валидацией(совместимостью флагов и прочего со спецификаторами). Возвращать ноль при ошибках
 	//if (check_value(format))
 	//{
-		*printed_count += print_value(format, args);
+        tmp = print_value(format, args);
+        if (tmp < 0)
+            return (0);
+		*printed_count += tmp;
 		return (i);
 	//}
 	//else
