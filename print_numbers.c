@@ -26,19 +26,15 @@ int		print_int(t_format format, va_list args)
 {
     t_integers  data;
 
-    if (format.type == 'i' || format.type == 'd')
-    {
-        if (format.modifier & MOD_H)
-            data.ll = (short)va_arg(args, int);
-        else if (format.modifier & MOD_HH)
-            data.ll = (signed char)va_arg(args, int);
-        else if (format.modifier & MOD_L)
-            data.ll = (long int)va_arg(args, long int);
-        else if (format.modifier & MOD_LL)
-            data.ll = (long long)va_arg(args, long long int);
-        else
-            data.ll = (int)va_arg(args, int);
-        return put_nbr_base(data, format, 10);
-    }
-    return print_int_unsigned(format, args);
+    if (format.modifier & MOD_H)
+        data.ll = (short)va_arg(args, int);
+    else if (format.modifier & MOD_HH)
+        data.ll = (signed char)va_arg(args, int);
+    else if (format.modifier & MOD_L)
+        data.ll = (long int)va_arg(args, long int);
+    else if (format.modifier & MOD_LL)
+        data.ll = (long long)va_arg(args, long long int);
+    else
+        data.ll = (int)va_arg(args, int);
+    return put_nbr_base(data, format, 10);
 }

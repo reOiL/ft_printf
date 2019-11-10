@@ -45,12 +45,14 @@ char    *ft_itoa_base(unsigned long long value, int base)
 
     if (base < 2 || base > 16 || value == 0)
     {
-        array = ft_strnew(1);
+        if(!(array = ft_strnew(1)))
+            return (NULL);
         array[0] = '0';
         return (array);
     }
     len = digit_len(value, base) - 1;
-    array = ft_strnew(len);
+    if(!(array = ft_strnew(len)))
+        return (NULL);
     itoa_base_2(&array, value, base, len - 1);
     return array;
 }
@@ -83,7 +85,8 @@ int     put_nbr_base(t_integers val, t_format format, int base)
         is_minus += 1;
         val.ull = -val.ll;
     }
-    tmp = ft_itoa_base(val.ull, base);
+    if(!(tmp = ft_itoa_base(val.ull, base)))
+        return (0);
     tmp = format.type == 'x' ? str_tolower(tmp) : tmp;
     len = ft_strlen(tmp);
     //TODO: maybe make type like flags by bits?
