@@ -79,20 +79,23 @@ int				calc_len(long long val, int base);
 char			cast_base(unsigned short val);
 void			itoa_2(char **array, long long val, int base, long long index);
 char			*ft_itoa_base(t_integers value, int base);
-int             put_nbr_base(t_integers val, t_format format, int base);
+int             put_nbr_base(t_integers val, int base);
 
 //helper_numbers.c
 int				count_digits(long long int value);
 
 //print_numbers.c
+int				print_int_unsigned(t_format format, va_list args);
 int				print_int(t_format format, va_list args);
 
+/* legacy
 //print_ints_helper.c
 int				print_normal_int(t_format format, int value);				//format.modifier = 0
 int				print_long_int(t_format format, long int value);			//format.modifier = 2 (l)
 int				print_long_long_int(t_format format, long long int value);	//format.modifier = 8 (ll)
 int				print_short_int(t_format format, short int value);			//format.modifier = 4 lh)
 int				print_signed_char_int(t_format format, char value);			//format.modifier = 16 (hh)
+*/
 
 //get_format.c
 unsigned int 	get_flags(const char *str, int *it);
@@ -111,10 +114,6 @@ int				get_format(va_list args, const char *str, int *printed_count);
 int				ft_printf(const char *format, ...);
 
 //Не реализованы
-int				print_oct(t_format format, va_list args);
-int				print_unsigned(t_format format, va_list args);
-int				print_low_hex(t_format format, va_list args);
-int				print_high_hex(t_format format, va_list args);
 int				print_float(t_format format, va_list args);
 
 #endif //FT_PRINTF_H

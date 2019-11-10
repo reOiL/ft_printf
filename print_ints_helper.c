@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+/*
 //TODO написать функции. Переделать, когда будут флаги. Добавить счет выводимых в консоль символов в возвращаемое значение.
 int				print_normal_int(t_format format, int value)
 {
@@ -77,3 +78,4 @@ int				print_signed_char_int(t_format format, char value)
 	ft_putnbr(value);
 	return (count_digits(value));
 }
+ */

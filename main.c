@@ -19,8 +19,8 @@ int main()
 	//int a = ft_printf("%5c  %-1.4s\n", '1', "abcde");
 	//int b = printf("%5c  %-1.4s\n", '1', "abcde");
 
-	int a = ft_printf("%18.15p\n", &c);
-	int b = printf("%18.15p\n", &c);
+	int a = ft_printf("%+18.15d\n", 25);
+	int b = printf("%+18.15d\n", 25);
 	//ft_printf("abcde%c   %s    %10.5d,  %10.2d\n", c, str, 6, 125);
 	//printf("abcde%c   %s    %10.5d,  %10.2d\n", c, str, 6, 125);
 	//printf("abcde%c   %s\n", c, str)

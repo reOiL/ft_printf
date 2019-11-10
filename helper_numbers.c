@@ -6,6 +6,11 @@ int 	count_digits(long long int value)
 	int		i;
 
 	i = 1;
+	if (value < 0)
+	{
+		i++;
+		value *= -1;
+	}
 	while (value / 10)
 	{
 		i++;

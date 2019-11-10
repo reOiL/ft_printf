@@ -9,7 +9,7 @@ int		calc_len(long long val, int base)
 
 char	cast_base(unsigned short val)
 {
-	char c;
+	char 		c;
 
 	c = '0';
 	if (val >= 0 && val <= 9)
@@ -28,9 +28,9 @@ void	itoa_2(char **array, long long val, int base, long long index)
 
 char	*ft_itoa_base(t_integers value, int base)
 {
-	char *array;
-	long long len;
-	int is_minus;
+	char 		*array;
+	long long 	len;
+	int 		is_minus;
 
 	if (base < 2 || base > 16)
 	{
@@ -54,13 +54,13 @@ char	*ft_itoa_base(t_integers value, int base)
 	return array;
 }
 
-int             put_nbr_base(t_integers val, t_format format, int base)
+int             put_nbr_base(t_integers val, int base)
 {
-	char *tmp;
-	size_t len;
+	char 		*tmp;
+	size_t 		len;
+
 	tmp = ft_itoa_base(val, base);
 	len = ft_strlen(tmp);
-
 	ft_putstr(tmp);
 	ft_strdel(&tmp);
 	return (len);
