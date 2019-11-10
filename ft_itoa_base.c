@@ -92,8 +92,10 @@ int     put_nbr_base(t_integers val, t_format format, int base)
     //TODO: maybe make type like flags by bits?
     if(is_minus && (format.type == 'd' || format.type == 'i'))
         spec = "-";
-    else if (format.flags & FLAG_SHARP && val.ull != 0)
+    else if (format.flags & FLAG_SHARP && val.ull != 0 && format.type == 'x')
         spec = "0x";
+    else if (format.flags & FLAG_SHARP && val.ull != 0 && format.type == 'X')
+        spec = "0X";
     else if (format.flags & FLAG_PLUS && (format.type == 'd' || format.type == 'i'))
         spec = "+";
     else if (format.flags & FLAG_SPACE && (format.type == 'd' || format.type == 'i'))
