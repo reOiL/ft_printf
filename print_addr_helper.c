@@ -21,7 +21,7 @@ char 		*get_addr_precision(char *num, int precision)
 	char	*new_num;
 
 	i = 2;
-	new_num = precision > 0 ? ft_strnew(precision) : ft_strnew(ft_strlen(num));
+	new_num = precision > 0 ? ft_strnew(precision + 2) : ft_strnew(ft_strlen(num) + 2);
 	new_num = ft_strcpy(new_num, "0x");
 	while (precision-- > (int)(ft_strlen(num)))
 		new_num[i++] = '0';
@@ -44,13 +44,13 @@ int 		print_address(t_format format, va_list args)
 	{
 		num = get_addr_precision(str_tolower(num), format.precision);
 		length = ft_putstr_size(num, ft_strlen(num));
-		while (width-- > length + 2)
+		while (width-- > length)
 			ft_putchar(' ');
 	}
 	else
 	{
 		num = get_addr_precision(str_tolower(num), format.precision);
-		while (width-- > ft_max(ft_strlen(num), format.precision) + 2)
+		while (width-- > ft_max(ft_strlen(num), format.precision))
 			ft_putchar(' ');
 		length = ft_putstr_size(num, ft_strlen(num));
 	}
