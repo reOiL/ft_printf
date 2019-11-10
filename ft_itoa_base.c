@@ -12,14 +12,14 @@
 
 #include "ft_printf.h"
 
-int		calc_len(unsigned long long val, int base)
+int     digit_len(unsigned long long val, int base)
 {
     if (val == 0)
         return (1);
-    return calc_len(val / base, base) + 1;
+    return digit_len(val / base, base) + 1;
 }
 
-char	cast_base(unsigned short val)
+char    cast_base(unsigned short val)
 {
     char c;
 
@@ -31,14 +31,14 @@ char	cast_base(unsigned short val)
     return (c);
 }
 
-void	itoa_2(char **array, unsigned long long val, int base, size_t index)
+void    itoa_base_2(char **array, unsigned long long val, int base, size_t index)
 {
     if (val / base != 0)
-        itoa_2(array, val / base, base, index - 1);
+        itoa_base_2(array, val / base, base, index - 1);
     (*array)[index] = cast_base(val % base);
 }
 
-char	*ft_itoa_base(unsigned long long value, int base)
+char    *ft_itoa_base(unsigned long long value, int base)
 {
     char *array;
     long long len;
@@ -49,13 +49,13 @@ char	*ft_itoa_base(unsigned long long value, int base)
         array[0] = '0';
         return (array);
     }
-    len = calc_len(value, base) - 1;
+    len = digit_len(value, base) - 1;
     array = ft_strnew(len);
-    itoa_2(&array, value, base, len - 1);
+    itoa_base_2(&array, value, base, len - 1);
     return array;
 }
 
-int        put_char_count(char c, int count)
+int     put_char_count(char c, int count)
 {
     int i;
 
@@ -69,17 +69,7 @@ int        put_char_count(char c, int count)
     return (i);
 }
 
-void    to_lower(char *str)
-{
-    while (*str)
-    {
-        if (*str > 'A' && *str < 'Z')
-            *str += 32;
-        str++;
-    }
-}
-
-int             put_nbr_base(t_integers val, t_format format, int base)
+int     put_nbr_base(t_integers val, t_format format, int base)
 {
     char *tmp;
     size_t len;
@@ -94,8 +84,7 @@ int             put_nbr_base(t_integers val, t_format format, int base)
         val.ull = -val.ll;
     }
     tmp = ft_itoa_base(val.ull, base);
-    if (format.type == 'x')
-        to_lower(tmp);
+    tmp = format.type == 'x' ? str_tolower(tmp) : tmp;
     len = ft_strlen(tmp);
     //TODO: maybe make type like flags by bits?
     if(is_minus && (format.type == 'd' || format.type == 'i'))
@@ -106,8 +95,7 @@ int             put_nbr_base(t_integers val, t_format format, int base)
         spec = "+";
     else if (format.flags & FLAG_SPACE && (format.type == 'd' || format.type == 'i'))
         spec = " ";
-    if (spec[0])
-        ft_putstr(spec);
+    ft_putstr(spec[0] != '\0' ? spec : "");
     if(!(format.flags & FLAG_MINUS) && format.width > 0)
         put_char_count(' ', format.width - ((format.precision > 0 ? format.precision : len)));
     if (format.flags & FLAG_ZERO || format.precision > 0)
