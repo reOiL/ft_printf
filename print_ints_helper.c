@@ -1,6 +1,5 @@
 #include "ft_printf.h"
 
-//TODO Решить проблему с флагами + и -
 int		print_reverse_int(t_integers data, t_format format, int count)
 {
 	int 	sign;
@@ -8,19 +7,18 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 
 	sign = is_neg(data.ll) || (format.flags & FLAG_PLUS);
 	prec = format.precision;
-	//if (format.flags & FLAG_PLUS || is_neg(data.ll))
-		count += print_sign(&data, format);
+	count += print_sign(&data, format);
 	while (prec-- > count_digits(data.ll, 10))
 	{
 		count++;
 		ft_putchar('0');
 	}
-	count += put_nbr_base(data, 10, 0);
+	count += put_nbr_base(format, data, 10, 0);
 	if (format.width > format.precision)
 	{
 		while (format.width > ft_max(format.precision, count_digits(data.ll, 10)) + sign)
 		{
-			ft_putchar(' ');
+			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
 			format.width--;
 			count++;
 		}
@@ -46,14 +44,13 @@ int 	print_modified_int(t_integers data, t_format format)
 			count++;
 		}
 	}
-	//if (format.flags & FLAG_PLUS || is_neg(data.ll))
-		count += print_sign(&data, format);
+	count += print_sign(&data, format);
 	while (format.precision-- > count_digits(data.ll, 10))
 	{
 		count++;
 		ft_putchar('0');
 	}
-	return (count + put_nbr_base(data, 10, 0));
+	return (count + put_nbr_base(format, data, 10, 0));
 }
 
 int		print_int(t_format format, va_list args)

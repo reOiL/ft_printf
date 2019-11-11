@@ -30,7 +30,7 @@ int main()
 	//int b = printf("%10d\n", -124);
 	//printf("%d  %d\n", a, b);
 
-
+	/*
 	printf("%s", "width & precision\n");
 	ft_printf("%10.5d %10.5d\n", -124, 124);
 	ft_printf("%-10.5d %-10.5d\n", -124, 124);
@@ -88,10 +88,81 @@ int main()
 	printf("% 10d % 10d\n", -124, 124);
 	printf("% .5d % .5d\n", -124, 124);
 	printf("% 10.5d % 10.5d\n\n", -124, 124);
+	*/
+	/*
+	printf("%s", "width & precision\n");
+	ft_printf("%10.5x %10.5x\n", -124, 124);
+	ft_printf("%-10.5x %-10.5x\n", -124, 124);
+	ft_printf("%+10.5x %+10.5x\n", -124, 124);
+	ft_printf("%-+10.5x %-+10.5x\n", -124, 124);
+	ft_printf("%+-10.5x %+-10.5x\n\n", -124, 124);
+	printf("%10.5x %10.5x\n", -124, 124);
+	printf("%-10.5x %-10.5x\n", -124, 124);
+	printf("%+10.5x %+10.5x\n", -124, 124);
+	printf("%-+10.5x %-+10.5x\n", -124, 124);
+	printf("%+-10.5x %+-10.5x\n\n", -124, 124);
 
-	ft_printf("% +d", 0);
-	//ft_printf("%010d\n", 124);
-	//printf("%010d\n", 124);
+
+	printf("%s", "only precision\n");
+	ft_printf("%.5x %.5x\n", -124, 124);
+	ft_printf("%-.5x %-.5x\n", -124, 124);
+	ft_printf("%+.5x %+.5x\n", -124, 124);
+	ft_printf("%-+.5x %-+.5x\n", -124, 124);
+	ft_printf("%+-.5x %+-.5x\n\n", -124, 124);
+	printf("%.5x %.5x\n", -124, 124);
+	printf("%-.5x %-.5x\n", -124, 124);
+	printf("%+.5x %+.5x\n", -124, 124);
+	printf("%-+.5x %-+.5x\n", -124, 124);
+	printf("%+-.5x %+-.5x\n\n", -124, 124);
+
+	printf("%s", "only width\n");
+	ft_printf("%10x %10x\n", -124, 124);
+	ft_printf("%-10x %-10x\n", -124, 124);
+	ft_printf("%+10x %+10x\n", -124, 124);
+	ft_printf("%-+10x %-+10x\n", -124, 124);
+	ft_printf("%+-10x %+-10x\n\n", -124, 124);
+	printf("%10x %10x\n", -124, 124);
+	printf("%-10x %-10x\n", -124, 124);
+	printf("%+10x %+10x\n", -124, 124);
+	printf("%-+10x %-+10x\n", -124, 124);
+	printf("%+-10x %+-10x\n\n", -124, 124);
+
+	printf("%s", "nothing\n");
+	ft_printf("%x %x\n", -124, 124);
+	ft_printf("%-x %-x\n", -124, 124);
+	ft_printf("%+x %+x\n", -124, 124);
+	ft_printf("%-+x %-+x\n", -124, 124);
+	ft_printf("%+-x %+-x\n\n", -124, 124);
+	printf("%x %x\n", -124, 124);
+	printf("%-x %-x\n", -124, 124);
+	printf("%+x %+x\n", -124, 124);
+	printf("%-+x %-+x\n", -124, 124);
+	printf("%+-x %+-x\n\n", -124, 124);
+
+	printf("%s", "space flag\n");
+	ft_printf("% x % x\n", -124, 124);
+	ft_printf("% 10x % 10x\n", -124, 124);
+	ft_printf("% .5x % .5x\n", -124, 124);
+	ft_printf("% 10.5x % 10.5x\n\n", -124, 124);
+	printf("% x % x\n", -124, 124);
+	printf("% 10x % 10x\n", -124, 124);
+	printf("% .5x % .5x\n", -124, 124);
+	printf("% 10.5x % 10.5x\n\n", -124, 124);
+	*/
+
+	printf("%s", "space flag\n");
+	ft_printf("% u % u\n", -124, 124);
+	ft_printf("% 10u % 10u\n", -124, 124);
+	ft_printf("% .5u % .5u\n", -124, 124);
+	ft_printf("% 10.5u % 10.5u\n", -124, 124);
+	ft_printf("%# u %# u\n", -124, 124);
+	ft_printf("%0 u %0 u\n\n", -124, 124);
+	printf("% u % u\n", -124, 124);
+	printf("% 10u % 10u\n", -124, 124);
+	printf("% .5u % .5u\n", -124, 124);
+	printf("% 10.5u % 10.5u\n", -124, 124);
+	printf("%# u %# u\n", -124, 124);
+	printf("%0 u %0 u\n", -124, 124);
 	free(str);
 	return (0);
 }

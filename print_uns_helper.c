@@ -1,29 +1,83 @@
 #include "ft_printf.h"
 
-int 	print_uns(t_integers data, t_format format, int base)
+int 	print_x(t_format format)
 {
-	int 	count;
+	if (format.type == 'x')
+	{
+		ft_putstr("0x");
+		return (2);
+	}
+	else if (format.type == 'X')
+	{
+		ft_putstr("0X");
+		return (2);
+	}
+	else if (format.type == 'o')
+	{
+		ft_putstr("0");
+		return (1);
+	}
+	return (0);
+}
 
-	count = 0;
-//	if (format.flags & FLAG_MINUS)
-//		return (print_reverse_uns(data, format, count));
+char	*ft_tolower_str(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_tolower(str[i]);
+		i++;
+	}
+	return (str);
+}
+
+int		print_reverse_uns(t_integers data, t_format format, int count, int base)
+{
+	int 	prec;
+
+	prec = format.precision;
+	while (prec-- > count_digits_uns(data.ull, base))
+	{
+		count++;
+		ft_putchar('0');
+	}
+	count += put_nbr_base(format, data, base, 1);
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)) + 1)
+		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
 		{
-			ft_putchar(' ');
+			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
 			format.width--;
 			count++;
 		}
 	}
-	if (format.flags & FLAG_PLUS)
-		count += print_sign(&data, format);
+	return (count);
+}
+
+int 	print_modified_uns(t_integers data, t_format format, int base)
+{
+	int 	count;
+
+	count = 0;
+	if (format.flags & FLAG_MINUS)
+		return (print_reverse_uns(data, format, count, base));
+	if (format.width > format.precision)
+	{
+		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
+		{
+			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
+			format.width--;
+			count++;
+		}
+	}
 	while (format.precision-- > count_digits_uns(data.ull, base))
 	{
 		count++;
 		ft_putchar('0');
 	}
-	return (count + put_nbr_base(data, base, 1));
+	return (count + put_nbr_base(format, data, base, 1));
 }
 
 int		print_int_unsigned(t_format format, va_list args)
@@ -41,8 +95,8 @@ int		print_int_unsigned(t_format format, va_list args)
 	else
 		data.ull = (unsigned int)va_arg(args, unsigned int);
 	if (format.type == 'x' || format.type == 'X')
-		return print_uns(data, format, 16);
+		return print_modified_uns(data, format, 16);
 	if (format.type == 'o')
-		return print_uns(data, format, 8);
-	return print_uns(data, format, 10);
+		return print_modified_uns(data, format, 8);
+	return print_modified_uns(data, format, 10);
 }

@@ -59,7 +59,7 @@ int 			count_digits_uns(unsigned long long value, int base)
 	return (i);
 }
 
-int             put_nbr_base(t_integers val, int base, int uns_sign)
+int             put_nbr_base(t_format format, t_integers val, int base, int uns_sign)
 {
 	char 		*tmp;
 	size_t 		len;
@@ -69,7 +69,9 @@ int             put_nbr_base(t_integers val, int base, int uns_sign)
 	else
 		tmp = ft_itoa_base(val.ll, base);
 	len = ft_strlen(tmp);
-	ft_putstr(tmp);
+	if (format.flags & FLAG_SHARP)
+		len += print_x(format);
+	ft_putstr(format.type == 'x' ? ft_tolower_str(tmp) : tmp);
 	ft_strdel(&tmp);
 	return (len);
 }

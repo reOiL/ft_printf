@@ -30,12 +30,12 @@
 /* Спецификаторы:
  * c +
  * s +
- * p -
- * d -
- * i -
+ * p +
+ * d +
+ * i +
  * o -
- * x -
- * X -
+ * x +
+ * X +
  * f -
  */
 
@@ -90,9 +90,13 @@ int 			is_neg(long long val);
 int 			print_sign(t_integers *data, t_format format);
 int				count_digits(long long value, int base);
 int				count_digits_uns(unsigned long long value, int base);
-int             put_nbr_base(t_integers val, int base, int uns_sign);
+int             put_nbr_base(t_format format, t_integers val, int base, int uns_sign);
 
-//print_numbers.c
+//print_uns_helper.c
+int 			print_x(t_format format);
+char			*ft_tolower_str(char *str);
+int 			print_reverse_uns(t_integers data, t_format format, int count, int base);
+int 			print_modified_uns(t_integers data, t_format format, int base);
 int				print_int_unsigned(t_format format, va_list args);
 
 //print_ints_helper.c
