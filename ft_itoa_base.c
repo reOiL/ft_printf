@@ -26,7 +26,7 @@ void	itoa_2(char **array, long long val, int base, long long index)
 	(*array)[index] = cast_base(val % base);
 }
 
-char	*ft_itoa_base(t_integers value, int base)
+char	*ft_itoa_base(long long ll, int base)
 {
 	char 		*array;
 	long long 	len;
@@ -39,29 +39,17 @@ char	*ft_itoa_base(t_integers value, int base)
 		return (array);
 	}
 	is_minus = 0;
-	if (value.ll < 0)
+	if (ll < 0)
 	{
 		if (base == 10)
 			is_minus = 1;
-		value.ll *= -1;
+		ll *= -1;
 	}
-	len = calc_len(value.ll, base) + (value.ll == 0);
+	len = calc_len(ll, base) + (ll == 0);
 	array = ft_strnew((len + is_minus));
 	if (is_minus)
 		array[0] = '-';
-	itoa_2(&array, value.ll, base, len - (2 - is_minus));
+	itoa_2(&array, ll, base, len - (2 - is_minus));
 	array[len - (1 - is_minus)] = '\0';
-	return array;
-}
-
-int             put_nbr_base(t_integers val, int base)
-{
-	char 		*tmp;
-	size_t 		len;
-
-	tmp = ft_itoa_base(val, base);
-	len = ft_strlen(tmp);
-	ft_putstr(tmp);
-	ft_strdel(&tmp);
-	return (len);
+	return (array);
 }

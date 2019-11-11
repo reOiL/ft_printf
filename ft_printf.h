@@ -78,24 +78,27 @@ int 			print_address(t_format format, va_list args);
 int				calc_len(long long val, int base);
 char			cast_base(unsigned short val);
 void			itoa_2(char **array, long long val, int base, long long index);
-char			*ft_itoa_base(t_integers value, int base);
-int             put_nbr_base(t_integers val, int base);
+char			*ft_itoa_base(long long ll, int base);
+
+//ft_itoa_base_uns.c
+int				calc_len_uns(unsigned long long val, int base);
+void			itoa_2_uns(char **array, unsigned long long val, int base, long long index);
+char			*ft_itoa_base_uns(unsigned long long ull, int base);
 
 //helper_numbers.c
-int				count_digits(long long int value);
+int 			is_neg(long long val);
+int 			print_sign(t_integers *data, t_format format);
+int				count_digits(long long value, int base);
+int				count_digits_uns(unsigned long long value, int base);
+int             put_nbr_base(t_integers val, int base, int uns_sign);
 
 //print_numbers.c
 int				print_int_unsigned(t_format format, va_list args);
-int				print_int(t_format format, va_list args);
 
-/* legacy
 //print_ints_helper.c
-int				print_normal_int(t_format format, int value);				//format.modifier = 0
-int				print_long_int(t_format format, long int value);			//format.modifier = 2 (l)
-int				print_long_long_int(t_format format, long long int value);	//format.modifier = 8 (ll)
-int				print_short_int(t_format format, short int value);			//format.modifier = 4 lh)
-int				print_signed_char_int(t_format format, char value);			//format.modifier = 16 (hh)
-*/
+int				print_reverse_int(t_integers data, t_format format, int count);
+int 			print_modified_int(t_integers data, t_format format);
+int				print_int(t_format format, va_list args);
 
 //get_format.c
 unsigned int 	get_flags(const char *str, int *it);
