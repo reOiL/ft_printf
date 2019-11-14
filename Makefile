@@ -6,7 +6,7 @@
 #    By: jwebber <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/26 17:06:25 by jwebber           #+#    #+#              #
-#    Updated: 2019/10/29 15:41:39 by jwebber          ###   ########.fr        #
+#    Updated: 2019/11/14 10:39:23 by jwebber          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC = ft_itoa_base.c \
         ft_printf.c \
         get_format.c \
         helper_numbers.c \
-        main.c print_addr_helper.c \
+        print_addr_helper.c \
         print_chars_helper.c \
         print_float.c \
         print_ints_helper.c \
@@ -25,7 +25,7 @@ OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = ft_printf
+NAME = libftprintf.a
 
 LIBFT_PATH = libft/
 
@@ -36,7 +36,7 @@ LIBFT = libft.a
 	@printf "\e[32m😲 😲 😲  build success \e[36m$<\n"
 
 $(NAME): $(OBJ) $(LIBFT_PATH)$(LIBFT)
-	@gcc $(FLAGS) $(OBJ) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+	@ar rc $(NAME) $(OBJ) $(LIBFT_PATH)$(LIBFT)
 	@printf "\e[36m 🏁  👍  👍  👍  $(NAME) 👍  👍  👍  🏁  !\n"
 
 $(LIBFT_PATH)$(LIBFT):

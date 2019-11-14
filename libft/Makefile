@@ -82,10 +82,6 @@ FLAGS = -Wall -Werror -Wextra
 
 RM = /bin/rm -f
 
-TEST_NAME = test.out
-
-TEST_SRC = test.c
-
 cc = gcc
 
 .c.o:
