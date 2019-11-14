@@ -25,14 +25,13 @@ int			print_value(t_format format, va_list args)
 		return(print_address(format, args));
 	else if (format.type == 'd' || format.type == 'i')
 		return(print_int(format, args));
-	else if(format.type == 'o' || format.type == 'u' ||
-            format.type == 'x' || format.type == 'X')
-        return(print_int_unsigned(format, args));
-	/*
+	else if (format.type == 'o' || format.type == 'u' ||\
+			format.type == 'x' || format.type == 'X')
+		return(print_int_unsigned(format, args));
+	/*	
 	else if (format.type == 'f')
 		return(print_float(format, args));
 	*/
-	return (-1);
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
@@ -40,7 +39,6 @@ int			get_format(va_list args, const char *str, int *printed_count)
 {
 	int 		i;
 	t_format	format;
-    int         tmp;
 
 	i = 1;
 	if (str[i] == '%')//Если у нас
@@ -65,10 +63,7 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	//TODO check_value - разобраться с валидацией(совместимостью флагов и прочего со спецификаторами). Возвращать ноль при ошибках
 	//if (check_value(format))
 	//{
-        tmp = print_value(format, args);
-        if (tmp < 0)
-            return (0);
-		*printed_count += tmp;
+		*printed_count += print_value(format, args);
 		return (i);
 	//}
 	//else
