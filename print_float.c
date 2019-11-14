@@ -5,37 +5,38 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-t_floating      parse_float(float val)
-{
-    t_floating  ret;
-    t_ufloating f;
-
-    ft_memset(&f, 0, sizeof(f));
-    ft_memset(&ret, 0, sizeof(ret));
-    f.f = val;
-    ret.sign = (f.i >> 31) ? -1 : 1;
-    ret.order = (f.i >> 23) & 0xFF;
-    ret.mantisa = ret.order ? (f.i & 0x7FFFFF) | 0x800000 : (f.i & 0x7FFFFF) << 1;
-    int a = (ret.order - 127);
-    int b = a > 0 ? ((ret.mantisa << a) & 0x7FFFFF) : ret.mantisa;
-    return (ret);
-}
-
 int				print_float(t_format format, va_list args)
 {
-    double d = va_arg(args, double);
-    int i = 0;
-    long long g = (long long)d;
+	double d;
+    int i;
+	t_integers  data;
+	t_format format1;
+	double acur;
+
+	d  = va_arg(args, double);
+    data.ll = (long long)d;
+    i = 0;
+    acur = 5;
+    ft_memset(&format1, 0, sizeof(format1));
+    format1.modifier = MOD_LL;
+    format.precision = format.precision < 0 ? 6 : format.precision;
+	data.ll += print_modified_int(data, format1);
     //todo: число меньше нуля
-    printf("%lli.", g); // todo: replace with ft_putnbr
-    //d -= (double))_d;
-    //todo: округлить число
-    while (i < 6) // todo: while i < precision
+    if(format.precision == 0)
+		return ((int)data.ll);
+    ft_putchar('.');
+	while (i < format.precision + 1)
+	{
+		acur /= 10;
+		i++;
+		data.ll++;
+	}
+	d += acur;
+    while (--i > 0 )
     {
         d *= 10;
-        printf("%c",(char)('0' + (int)(d) % 10));
-        i++;
-        d -= (double)(long long)d;
+        ft_putchar((char)('0' + (unsigned long long)(d) % 10));
+        //d -= (double)(long long)d;
     }
-    return (0);
+    return ((int)data.ll);
 }

@@ -72,7 +72,7 @@ int 	get_precision(const char *str, int *i)
 	return (precision);
 }
 
-int		get_modifier(const char *str, int *i)
+unsigned int		get_modifier(const char *str, int *i)
 {
 	if (*str == 'l')
 	{

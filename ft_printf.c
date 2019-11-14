@@ -28,10 +28,9 @@ int			print_value(t_format format, va_list args)
 	else if (format.type == 'o' || format.type == 'u' ||\
 			format.type == 'x' || format.type == 'X')
 		return(print_int_unsigned(format, args));
-	/*	
 	else if (format.type == 'f')
 		return(print_float(format, args));
-	*/
+	return (-1);
 }
 
 // get_format - получим все данные о том, как нужно печатать, после передадим это все в print_value
