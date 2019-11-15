@@ -64,13 +64,26 @@ int             put_nbr_base(t_format format, t_integers val, int base, int uns_
 	char 		*tmp;
 	size_t 		len;
 
+	if (!format.precision && val.ull == 0 && (format.type == 'x' || \
+	format.type == 'X' || (format.type == 'o' && !(format.flags & FLAG_SHARP))))
+	{
+		if (format.width)
+		{
+			ft_putchar(' ');
+			return (1);
+		}
+		return (0);
+	}
 	if (uns_sign)
 		tmp = ft_itoa_base_uns(val.ull, base);
 	else
 		tmp = ft_itoa_base(val.ll, base);
 	len = ft_strlen(tmp);
-	if (format.flags & FLAG_SHARP)
-		len += print_x(format);
+	while (format.precision-- > count_digits_uns(val.ull, base))
+	{
+		len++;
+		ft_putchar('0');
+	}
 	ft_putstr(format.type == 'x' ? ft_tolower_str(tmp) : tmp);
 	ft_strdel(&tmp);
 	return (len);

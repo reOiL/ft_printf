@@ -163,6 +163,9 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
+	int a = ft_printf("%#.o\n", 0);
+	int b = printf("%#.o\n", 0);
+	printf("%d %d\n", a, b);
 	free(str);
 	return (0);
 }

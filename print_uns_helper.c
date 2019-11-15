@@ -35,20 +35,17 @@ char	*ft_tolower_str(char *str)
 
 int		print_reverse_uns(t_integers data, t_format format, int count, int base)
 {
-	int 	prec;
-
-	prec = format.precision;
-	while (prec-- > count_digits_uns(data.ull, base))
+	if ((format.flags & FLAG_SHARP) && data.ull != 0)
 	{
-		count++;
-		ft_putchar('0');
+		count += print_x(format);
+		format.width -= count;
 	}
 	count += put_nbr_base(format, data, base, 1);
 	if (format.width > format.precision)
 	{
 		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
 		{
-			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
+			ft_putchar(' ');
 			format.width--;
 			count++;
 		}
@@ -63,6 +60,11 @@ int 	print_modified_uns(t_integers data, t_format format, int base)
 	count = 0;
 	if (format.flags & FLAG_MINUS)
 		return (print_reverse_uns(data, format, count, base));
+	if ((format.flags & FLAG_SHARP) && data.ull != 0 && format.type != 'u')
+	{
+		format.width -= (format.type == 'o') ? 1 : 2;
+		count += (format.flags & FLAG_ZERO) ? print_x(format) : 0;
+	}
 	if (format.width > format.precision)
 	{
 		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
@@ -72,11 +74,8 @@ int 	print_modified_uns(t_integers data, t_format format, int base)
 			count++;
 		}
 	}
-	while (format.precision-- > count_digits_uns(data.ull, base))
-	{
-		count++;
-		ft_putchar('0');
-	}
+	if ((format.flags & FLAG_SHARP) && data.ull != 0 && !(format.flags & FLAG_ZERO))
+		count += print_x(format);
 	return (count + put_nbr_base(format, data, base, 1));
 }
 

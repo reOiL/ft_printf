@@ -33,7 +33,7 @@
  * p +
  * d +
  * i +
- * o -
+ * o +
  * x +
  * X +
  * f -
@@ -54,7 +54,6 @@ typedef struct			s_format
 	int					precision;	// Точность.
 	int					modifier;	// Модификаторы (l, h, ll, hh, L)(пока хз как лучше это сделать), возвращаемое значение указывает на модификатор, без = 0, l = 1, h = 2, ll = 3, hh = 4, L = 5
 	char				type;		// Тип преобразования.(или int)
-	//void				*value;		// Нужен ли нам в этой структуре указатель на выводимое значение?
 }						t_format;
 
 /*
@@ -86,45 +85,41 @@ char					*ft_itoa_base(long long ll, int base);
 
 //ft_itoa_base_uns.c
 int						calc_len_uns(unsigned long long val, int base);
-void			itoa_2_uns(char **array, unsigned long long val, int base, long long index);
-char			*ft_itoa_base_uns(unsigned long long ull, int base);
+void					itoa_2_uns(char **array, unsigned long long val, int base, long long index);
+char					*ft_itoa_base_uns(unsigned long long ull, int base);
 
 //helper_numbers.c
-int 			is_neg(long long val);
-int 			print_sign(t_integers *data, t_format format);
-int				count_digits(long long value, int base);
-int				count_digits_uns(unsigned long long value, int base);
-int             put_nbr_base(t_format format, t_integers val, int base, int uns_sign);
+int 					is_neg(long long val);
+int 					print_sign(t_integers *data, t_format format);
+int						count_digits(long long value, int base);
+int						count_digits_uns(unsigned long long value, int base);
+int             		put_nbr_base(t_format format, t_integers val, int base, int uns_sign);
 
 //print_uns_helper.c
-int 			print_x(t_format format);
-char			*ft_tolower_str(char *str);
-int 			print_reverse_uns(t_integers data, t_format format, int count, int base);
-int 			print_modified_uns(t_integers data, t_format format, int base);
-int				print_int_unsigned(t_format format, va_list args);
+int 					print_x(t_format format);
+char					*ft_tolower_str(char *str);
+int 					print_reverse_uns(t_integers data, t_format format, int count, int base);
+int 					print_modified_uns(t_integers data, t_format format, int base);
+int						print_int_unsigned(t_format format, va_list args);
 
 //print_ints_helper.c
-int				print_reverse_int(t_integers data, t_format format, int count);
-int 			print_modified_int(t_integers data, t_format format);
-int				print_int(t_format format, va_list args);
+int						print_reverse_int(t_integers data, t_format format, int count);
+int 					print_modified_int(t_integers data, t_format format);
+int						print_int(t_format format, va_list args);
 
 //get_format.c
-unsigned int 	get_flags(const char *str, int *it);
-int 			get_width(const char *str, int *i);
-int 			get_precision(const char *str, int *i);
-int				get_modifier(const char *str, int *i);
-char 			get_type(const char *str);
-
-//ft_putnbr_long_long.c
-int				ft_putnbr_long_long(long long int n, int count);
-int				ft_putnbr_unsigned(long long unsigned int n, int count);
+unsigned int 			get_flags(const char *str, int *it);
+int 					get_width(const char *str, int *i);
+int 					get_precision(const char *str, int *i);
+int						get_modifier(const char *str, int *i);
+char 					get_type(const char *str);
 
 //ft_printf.c
-int				print_value(t_format format, va_list args);
-int				get_format(va_list args, const char *str, int *printed_count);
-int				ft_printf(const char *format, ...);
+int						print_value(t_format format, va_list args);
+int						get_format(va_list args, const char *str, int *printed_count);
+int						ft_printf(const char *format, ...);
 
 //Не реализованы
-int				print_float(t_format format, va_list args);
+int						print_float(t_format format, va_list args);
 
 #endif //FT_PRINTF_H
