@@ -68,6 +68,7 @@ typedef struct			s_format
 int 					print_percent(t_format format);
 
 //print_char_helper.c
+int 					print_minus_string(t_format format, char *str, long long length);
 int						print_char(t_format format, va_list args);
 int						print_string(t_format format, va_list args);
 
@@ -94,6 +95,9 @@ int 					print_sign(t_integers *data, t_format format);
 int						count_digits(long long value, int base);
 int						count_digits_uns(unsigned long long value, int base);
 int             		put_nbr_base(t_format format, t_integers val, int base, int uns_sign);
+
+//helper_numbers2.c
+int 					check_zero_number(t_format format, t_integers val);
 
 //print_uns_helper.c
 int 					print_x(t_format format);

@@ -82,4 +82,4 @@ add_executable(test_printf
         print_chars_helper.c
         print_ints_helper.c
         print_percent_helper.c
-        print_uns_helper.c)
+        print_uns_helper.c helper_numbers2.c)
