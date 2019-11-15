@@ -64,24 +64,28 @@ typedef struct			s_format
  * после % функция будет возвращать 0, что будет означать печать тех символов, что есть в 
  * строке
 */
+
+//print_percent_helper.c
+int 					print_percent(t_format format);
+
 //print_char_helper.c
-int				print_char(t_format format, va_list args);
-int				print_string(t_format format, va_list args);
+int						print_char(t_format format, va_list args);
+int						print_string(t_format format, va_list args);
 
 //print_addr_helper.c
-long long		ft_max(long long a, long long b);
-char 			*get_addr_precision(char *num, int precision);
-int 			ft_putstr_size(char *str, int precision);
-int 			print_address(t_format format, va_list args);
+long long				ft_max(long long a, long long b);
+char 					*get_addr_precision(char *num, int precision);
+int 					ft_putstr_size(char *str, int precision);
+int 					print_address(t_format format, va_list args);
 
 //ft_itoa_base.c
-int				calc_len(long long val, int base);
-char			cast_base(unsigned short val);
-void			itoa_2(char **array, long long val, int base, long long index);
-char			*ft_itoa_base(long long ll, int base);
+int						calc_len(long long val, int base);
+char					cast_base(unsigned short val);
+void					itoa_2(char **array, long long val, int base, long long index);
+char					*ft_itoa_base(long long ll, int base);
 
 //ft_itoa_base_uns.c
-int				calc_len_uns(unsigned long long val, int base);
+int						calc_len_uns(unsigned long long val, int base);
 void			itoa_2_uns(char **array, unsigned long long val, int base, long long index);
 char			*ft_itoa_base_uns(unsigned long long ull, int base);
 

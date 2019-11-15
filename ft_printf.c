@@ -17,17 +17,19 @@ int			print_value(t_format format, va_list args)
 	//TODO после написания всех функций get_*, придумать, как все это выводить.
 	//TODO Все еще проблема с получением количества выводимых символов. Хз, получится ли каждый раз передавать адрес printed_count //upd. попробую возвращать на этом этапе количество печатаемых символов
 	// Разобраться с сhar и string, как самым простым
+	if (format.type == '%')
+		return (print_percent(format));
 	if (format.type == 'c')
-		return(print_char(format, args));
+		return (print_char(format, args));
 	else if (format.type == 's')
-		return(print_string(format, args));
+		return (print_string(format, args));
 	else if (format.type == 'p')
-		return(print_address(format, args));
+		return (print_address(format, args));
 	else if (format.type == 'd' || format.type == 'i')
-		return(print_int(format, args));
+		return (print_int(format, args));
 	else if (format.type == 'o' || format.type == 'u' ||\
 			format.type == 'x' || format.type == 'X')
-		return(print_int_unsigned(format, args));
+		return (print_int_unsigned(format, args));
 	/*	
 	else if (format.type == 'f')
 		return(print_float(format, args));
@@ -41,11 +43,6 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	t_format	format;
 
 	i = 1;
-	if (str[i] == '%')//Если у нас
-	{
-		ft_putchar(str[i]);
-		return (2);
-	}
 	format.flags = get_flags(&str[i], &i);
 	// Передадим значение i по адресу,
 	// чтобы мы могли его изменить прямо в функции
@@ -54,20 +51,18 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	format.width = get_width(&str[i], &i);
 	format.precision = get_precision(&str[i], &i);
 	format.modifier = get_modifier(&str[i], &i);
-	format.type = get_type(&str[i++]);
+	format.type = get_type(&str[i]);
 
 	//Нужна какая то проверка, пока нет идей кроме как возвращать
 	//странные значение в параметры format, а потом в функции check_value их проверять,
 	//прежде чем отправлять печатать
 
-	//TODO check_value - разобраться с валидацией(совместимостью флагов и прочего со спецификаторами). Возвращать ноль при ошибках
-	//if (check_value(format))
-	//{
+	if (format.type)
+	{
 		*printed_count += print_value(format, args);
-		return (i);
-	//}
-	//else
-	//	return (0);
+		return (i + 1);
+	}
+	return (0);
 }
 
 int			ft_printf(const char *str, ...)

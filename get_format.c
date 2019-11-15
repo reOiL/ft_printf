@@ -35,7 +35,7 @@ char 	get_type(const char *str)
 		return (*str);
 	else if (*str == 'u' || *str == 'x' || *str == 'X')
 		return (*str);
-	else if (*str == 'f')
+	else if (*str == 'f' || *str == '%')
 		return (*str);
 	else
 		return (0);

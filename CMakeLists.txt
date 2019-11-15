@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.15)
-project(git_printf C)
+cmake_minimum_required(VERSION 3.14)
+project(test_printf C)
 
 set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
 include_directories(libft)
 
-add_executable(git_printf
+add_executable(test_printf
         libft/ft_atoi.c
         libft/ft_bzero.c
         libft/ft_isalnum.c
@@ -82,4 +82,4 @@ add_executable(git_printf
         print_addr_helper.c
         print_chars_helper.c
         print_ints_helper.c
-        print_uns_helper.c)
+        print_uns_helper.c print_percent_helper.c)
