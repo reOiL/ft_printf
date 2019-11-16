@@ -163,8 +163,8 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("%lld", -9223372036854775808);
-	int b = printf("%lld", -9223372036854775808);
+	int a = ft_printf("%.13Lf\n", (long double)1444565444646.6465424242242);
+	int b = printf("%.13Lf\n", (long double)1444565444646.6465424242242);
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);

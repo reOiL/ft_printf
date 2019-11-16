@@ -75,7 +75,6 @@ add_executable(ft_printf
         ft_itoa_base_uns.c
         ft_printf.c
         ft_printf.h
-        ft_putnbr_longlong.c
         get_format.c
         helper_numbers.c
         main.c
