@@ -83,4 +83,4 @@ add_executable(ft_printf
         print_chars_helper.c
         print_float.c
         print_ints_helper.c
-        print_uns_helper.c)
+        print_uns_helper.c colors.c color.h)
