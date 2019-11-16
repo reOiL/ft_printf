@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base_uns.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:53:18 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:53:51 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		calc_len_uns(unsigned long long val, int base)
@@ -7,7 +19,8 @@ int		calc_len_uns(unsigned long long val, int base)
 	return (calc_len(val / base, base) + 1);
 }
 
-void	itoa_2_uns(char **array, unsigned long long val, int base, long long index)
+void	itoa_2_uns(char **array, unsigned long long val, \
+		int base, long long index)
 {
 	if (val / base != 0)
 		itoa_2_uns(array, val / base, base, index - 1);
@@ -16,8 +29,8 @@ void	itoa_2_uns(char **array, unsigned long long val, int base, long long index)
 
 char	*ft_itoa_base_uns(unsigned long long ull, int base)
 {
-	char 		*array;
-	long long 	len;
+	char		*array;
+	long long	len;
 
 	if (base < 2 || base > 16)
 	{

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_uns_helper.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:50:40 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:52:51 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int 	print_x(t_format format, t_integers data)
+int		print_x(t_format format, t_integers data)
 {
 	if (format.type == 'x')
 	{
@@ -12,7 +24,8 @@ int 	print_x(t_format format, t_integers data)
 		ft_putstr("0X");
 		return (2);
 	}
-	else if (format.type == 'o' && format.precision < count_digits_uns(data.ull, 8))
+	else if (format.type == 'o' && \
+			format.precision < count_digits_uns(data.ull, 8))
 	{
 		ft_putstr("0");
 		return (1);
@@ -33,7 +46,8 @@ char	*ft_tolower_str(char *str)
 	return (str);
 }
 
-int		print_reverse_uns(t_integers data, t_format format, int count, int base)
+int		print_reverse_uns(t_integers data, \
+		t_format format, int count, int base)
 {
 	if ((format.flags & FLAG_SHARP) && data.ull != 0)
 	{
@@ -43,7 +57,8 @@ int		print_reverse_uns(t_integers data, t_format format, int count, int base)
 	count += put_nbr_base(format, data, base, 1);
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
+		while (format.width > ft_max(format.precision, \
+					count_digits_uns(data.ull, base)))
 		{
 			ft_putchar(' ');
 			format.width--;
@@ -53,9 +68,9 @@ int		print_reverse_uns(t_integers data, t_format format, int count, int base)
 	return (count);
 }
 
-int 	print_modified_uns(t_integers data, t_format format, int base)
+int		print_modified_uns(t_integers data, t_format format, int base)
 {
-	int 	count;
+	int		count;
 
 	count = 0;
 	if (format.flags & FLAG_MINUS)
@@ -67,21 +82,23 @@ int 	print_modified_uns(t_integers data, t_format format, int base)
 	}
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
+		while (format.width > ft_max(format.precision, \
+					count_digits_uns(data.ull, base)))
 		{
 			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
 			format.width--;
 			count++;
 		}
 	}
-	if ((format.flags & FLAG_SHARP) && data.ull != 0 && !(format.flags & FLAG_ZERO))
+	if ((format.flags & FLAG_SHARP) && data.ull != 0 \
+			&& !(format.flags & FLAG_ZERO))
 		count += print_x(format, data);
 	return (count + put_nbr_base(format, data, base, 1));
 }
 
 int		print_int_unsigned(t_format format, va_list args)
 {
-	t_integers  data;
+	t_integers	data;
 
 	if (format.modifier & MOD_H)
 		data.ull = (unsigned short)va_arg(args, int);
@@ -94,8 +111,8 @@ int		print_int_unsigned(t_format format, va_list args)
 	else
 		data.ull = (unsigned int)va_arg(args, unsigned int);
 	if (format.type == 'x' || format.type == 'X')
-		return print_modified_uns(data, format, 16);
+		return (print_modified_uns(data, format, 16));
 	if (format.type == 'o')
-		return print_modified_uns(data, format, 8);
-	return print_modified_uns(data, format, 10);
+		return (print_modified_uns(data, format, 8));
+	return (print_modified_uns(data, format, 10));
 }
