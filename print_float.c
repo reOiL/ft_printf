@@ -56,7 +56,7 @@ int				print_float(t_format format, va_list args)
 	double	d;
 	char	*leading;
 	char 	*fraction;
-	size_t 	size;
+	int 	size;
 
 	d  = va_arg(args, double);
 	size = 0;
@@ -81,5 +81,5 @@ int				print_float(t_format format, va_list args)
 		size += putchar_count(' ', format.width - size);
 	ft_strdel(&leading);
 	ft_strdel(&fraction);
-	return ((int)size);
+	return (size);
 }
