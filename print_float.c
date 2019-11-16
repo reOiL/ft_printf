@@ -5,38 +5,81 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
+char	*float_leading(double d)
+{
+	return (ft_itoa_base((long long)d, 10));
+}
+
+char 	*float_fraction(double d, int *precision)
+{
+	char	*ret;
+	double	accur;
+	int 	i;
+
+	*precision = *precision < 0 ? 6 : *precision;
+	if (!(ret = ft_strnew(*precision + (precision != 0))))
+		return (NULL);
+	if (*precision == 0)
+		return (ret);
+	d = d < 0 ? -d : d;
+	accur = 5;
+	i = 0;
+	while (i < *precision + 1)
+	{
+		accur /= 10;
+		i++;
+	}
+	ret[i = 0] = '.';
+	d += accur;
+	while (i < *precision)
+	{
+		d *= 10;
+		ret[++i] = ('0' + (unsigned long long)d % 10);
+	}
+	return (ret);
+}
+
+size_t 	putchar_count(char c, size_t count)
+{
+	char	*p;
+
+	if (!(p = ft_strnew(count)))
+		return (0);
+	ft_memset(p, c, count);
+	ft_putstr(p);
+	ft_strdel(&p);
+	return (count);
+}
+
 int				print_float(t_format format, va_list args)
 {
-	double d;
-    int i;
-	t_integers  data;
-	t_format format1;
-	double acur;
+	double	d;
+	char	*leading;
+	char 	*fraction;
+	size_t 	size;
 
 	d  = va_arg(args, double);
-    data.ll = (long long)d;
-    i = 0;
-    acur = 5;
-    ft_memset(&format1, 0, sizeof(format1));
-    format1.modifier = MOD_LL;
-    format.precision = format.precision < 0 ? 6 : format.precision;
-	data.ll += print_modified_int(data, format1);
-    //todo: число меньше нуля
-    if(format.precision == 0)
-		return ((int)data.ll);
-    ft_putchar('.');
-	while (i < format.precision + 1)
+	size = 0;
+	if(!(leading = float_leading(d)))
+		return (0);
+	if (!(fraction = float_fraction(d, &format.precision)))
 	{
-		acur /= 10;
-		i++;
-		data.ll++;
+		ft_strdel(&leading);
+		return (0);
 	}
-	d += acur;
-    while (--i > 0 )
-    {
-        d *= 10;
-        ft_putchar((char)('0' + (unsigned long long)(d) % 10));
-        //d -= (double)(long long)d;
-    }
-    return ((int)data.ll);
+	size += ft_strlen(leading) + ft_strlen(fraction);
+	if (format.flags & FLAG_PLUS)
+	{
+		size++;
+		ft_putchar('+');
+	}
+	if (format.width > 0 && format.width > size && !(format.flags & FLAG_MINUS))
+		size += putchar_count(' ', format.width - size);
+	ft_putstr(leading);
+	ft_putstr(fraction);
+	if (format.flags & FLAG_MINUS && format.width > 0 && format.width > size)
+		size += putchar_count(' ', format.width - size);
+	ft_strdel(&leading);
+	ft_strdel(&fraction);
+	return ((int)size);
 }
