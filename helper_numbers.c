@@ -10,7 +10,9 @@ int 	print_sign(t_integers *data, t_format format)
 	if ((*data).ll < 0)
 	{
 		ft_putchar('-');
-		(*data).ll = -(*data).ll;
+		if (!(((*data).ll == MIN_LONG && format.modifier & MOD_L) \
+		|| ((*data).ull == MIN_LLONG && format.modifier & MOD_LL)))
+			(*data).ll = -(*data).ll;
 		return (1);
 	}
 	else if (format.flags & FLAG_PLUS && (*data).ll >= 0)

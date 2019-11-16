@@ -33,12 +33,12 @@ char	*ft_itoa_base(long long ll, int base)
 	int 		is_minus;
 
 	if (base < 2 || base > 16)
-	{
-		array = ft_strnew(1);
-		array[0] = '0';
-		return (array);
-	}
+		return (ft_strdup("0"));
 	is_minus = 0;
+	if ((unsigned long long)ll == (unsigned long long)MIN_LLONG + 1)
+		return (ft_strdup("9223372036854775808"));
+	if (ll == MIN_LONG)
+		return (ft_strdup("2147483648"));
 	if (ll < 0)
 	{
 		if (base == 10)

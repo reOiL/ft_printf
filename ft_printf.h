@@ -27,6 +27,8 @@
 # define MOD_H 0x8
 # define MOD_HH 0x10
 
+# define MIN_LONG -2147483648
+# define MIN_LLONG 9223372036854775807
 /* Спецификаторы:
  * c +
  * s +
