@@ -21,7 +21,8 @@ char 	*float_fraction(long double d, int *precision)
 		return (NULL);
 	if (*precision == 0)
 		return (ret);
-	d = d < 0 ? -d : d;
+	d = (d < 0 ? -d : d);
+	d -= (long long)d;
 	accur = 5;
 	i = 0;
 	while (i < *precision + 1)
