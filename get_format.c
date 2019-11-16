@@ -94,12 +94,10 @@ unsigned int		get_modifier(const char *str, int *i)
 		}
 		return (MOD_H);
 	}
-	/*
 	else if (*str == 'L')
 	{
 		(*i)++;
-		return (5);
+		return (MOD_LD);
 	}
-	*/
 	return (0);
 }

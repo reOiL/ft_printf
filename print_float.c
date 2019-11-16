@@ -5,12 +5,12 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
-char	*float_leading(double d)
+char	*float_leading(long double d)
 {
 	return (ft_itoa_base((long long)d, 10));
 }
 
-char 	*float_fraction(double d, int *precision)
+char 	*float_fraction(long double d, int *precision)
 {
 	char	*ret;
 	double	accur;
@@ -53,12 +53,15 @@ size_t 	putchar_count(char c, size_t count)
 
 int				print_float(t_format format, va_list args)
 {
-	double	d;
+	long double	d;
 	char	*leading;
 	char 	*fraction;
 	int 	size;
 
-	d  = va_arg(args, double);
+	if (format.modifier & MOD_LD)
+		d  = va_arg(args, long double);
+	else
+		d  = va_arg(args, double);
 	size = 0;
 	if(!(leading = float_leading(d)))
 		return (0);

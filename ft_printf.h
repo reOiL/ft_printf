@@ -26,6 +26,7 @@
 # define MOD_LL 0x4
 # define MOD_H 0x8
 # define MOD_HH 0x10
+# define MOD_LD 0x20
 
 /* Спецификаторы:
  * c +

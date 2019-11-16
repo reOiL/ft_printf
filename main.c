@@ -190,6 +190,8 @@ int main()
 	printf("% f\n", -1447432.123456789);
 	ft_printf("%+f\n", 1447432.123456789);
 	printf("%+f\n", 1447432.123456789);
+	ft_printf("%+Lf\n", (long double)(1e+37) + 1);
+	printf("%+Lf\n", (long double)(1e+37) + 1);
 	free(str);
 	return (0);
 }
