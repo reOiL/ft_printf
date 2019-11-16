@@ -100,7 +100,7 @@ int             		put_nbr_base(t_format format, t_integers val, int base, int un
 int 					check_zero_number(t_format format, t_integers val);
 
 //print_uns_helper.c
-int 					print_x(t_format format);
+int 					print_x(t_format format, t_integers data);
 char					*ft_tolower_str(char *str);
 int 					print_reverse_uns(t_integers data, t_format format, int count, int base);
 int 					print_modified_uns(t_integers data, t_format format, int base);

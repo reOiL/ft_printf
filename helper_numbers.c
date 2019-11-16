@@ -65,10 +65,7 @@ int             put_nbr_base(t_format format, t_integers val, int base, int uns_
 	if (check_zero_number(format, val))
 	{
 		if (format.width)
-		{
-			ft_putchar(' ');
-			return (1);
-		}
+			return (ft_putstr_size(ft_strdup(" "), 2));
 		return (0);
 	}
 	if (uns_sign)

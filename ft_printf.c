@@ -82,9 +82,9 @@ int			ft_printf(const char *str, ...)
 			offset = get_format(args, &str[i], &printed_count);
 			if (offset)//Если у нас get_format вернет 0, значит что то не так со спецификаторами
 				i += offset;
-			else
+			else if (str[++i])
 			{
-				ft_putchar(str[i++]);
+				ft_putchar(str[i]);
 				printed_count++;
 			}
 		}

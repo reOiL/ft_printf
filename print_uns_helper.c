@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int 	print_x(t_format format)
+int 	print_x(t_format format, t_integers data)
 {
 	if (format.type == 'x')
 	{
@@ -12,7 +12,7 @@ int 	print_x(t_format format)
 		ft_putstr("0X");
 		return (2);
 	}
-	else if (format.type == 'o')
+	else if (format.type == 'o' && format.precision < count_digits_uns(data.ull, 8))
 	{
 		ft_putstr("0");
 		return (1);
@@ -37,7 +37,7 @@ int		print_reverse_uns(t_integers data, t_format format, int count, int base)
 {
 	if ((format.flags & FLAG_SHARP) && data.ull != 0)
 	{
-		count += print_x(format);
+		count += print_x(format, data);
 		format.width -= count;
 	}
 	count += put_nbr_base(format, data, base, 1);
@@ -63,7 +63,7 @@ int 	print_modified_uns(t_integers data, t_format format, int base)
 	if ((format.flags & FLAG_SHARP) && data.ull != 0 && format.type != 'u')
 	{
 		format.width -= (format.type == 'o') ? 1 : 2;
-		count += (format.flags & FLAG_ZERO) ? print_x(format) : 0;
+		count += (format.flags & FLAG_ZERO) ? print_x(format, data) : 0;
 	}
 	if (format.width > format.precision)
 	{
@@ -75,7 +75,7 @@ int 	print_modified_uns(t_integers data, t_format format, int base)
 		}
 	}
 	if ((format.flags & FLAG_SHARP) && data.ull != 0 && !(format.flags & FLAG_ZERO))
-		count += print_x(format);
+		count += print_x(format, data);
 	return (count + put_nbr_base(format, data, base, 1));
 }
 

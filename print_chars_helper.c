@@ -47,20 +47,20 @@ int 			print_minus_string(t_format format, char *str, long long length)
 
 int				print_string(t_format format, va_list args)
 {
-	int		length;
-	char	*str;
-	int		i;
+	int 	length;
+	char 	*str;
+	int 	i;
 
 	i = 0;
 	if (!(str = ft_strdup(va_arg(args, char*))))
 		return (ft_putstr_size(ft_strdup("(null)"), 6));
-	length = format.precision != -1 \
- ? format.precision : (int) ft_strlen(str);
+	length = format.precision < (int)ft_strlen(str) && format.precision != -1 \
+ ? format.precision : (int)ft_strlen(str);
 	if (format.flags & FLAG_MINUS)
 		return (print_minus_string(format, str, length));
 	while (format.width > length++)
 		ft_putchar(' ');
-	if (format.precision > (int) ft_strlen(str) && format.width)
+	if (format.precision > format.width && format.precision < (int)ft_strlen(str))
 	{
 		while (format.precision > (int) ft_strlen(str) + i++)
 			ft_putchar(' ');

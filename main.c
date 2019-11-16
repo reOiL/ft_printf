@@ -163,8 +163,8 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("%-5s is a string\n", "this");
-	int b = printf("%-5s is a string\n", "this");
+	int a = ft_printf("%4.15s\n", "42");
+	int b = printf("%4.15s\n", "42");
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);
