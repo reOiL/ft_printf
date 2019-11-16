@@ -1,7 +1,5 @@
 #include "ft_printf.h"
 
-//TODO Возможно нужен еще подсчет для 16 и 8
-
 int 	is_neg(long long val)
 {
 	return (val < 0);
@@ -12,7 +10,9 @@ int 	print_sign(t_integers *data, t_format format)
 	if ((*data).ll < 0)
 	{
 		ft_putchar('-');
-		(*data).ll = -(*data).ll;
+		if (!(((*data).ll == MIN_LONG && format.modifier & MOD_L) \
+		|| ((*data).ull == MIN_LLONG && format.modifier & MOD_LL)))
+			(*data).ll = -(*data).ll;
 		return (1);
 	}
 	else if (format.flags & FLAG_PLUS && (*data).ll >= 0)
@@ -64,13 +64,22 @@ int             put_nbr_base(t_format format, t_integers val, int base, int uns_
 	char 		*tmp;
 	size_t 		len;
 
+	if (check_zero_number(format, val))
+	{
+		if (format.width)
+			return (ft_putstr_size(ft_strdup(" "), 2));
+		return (0);
+	}
 	if (uns_sign)
 		tmp = ft_itoa_base_uns(val.ull, base);
 	else
 		tmp = ft_itoa_base(val.ll, base);
 	len = ft_strlen(tmp);
-	if (format.flags & FLAG_SHARP)
-		len += print_x(format);
+	while (format.precision-- > count_digits_uns(val.ull, base))
+	{
+		len++;
+		ft_putchar('0');
+	}
 	ft_putstr(format.type == 'x' ? ft_tolower_str(tmp) : tmp);
 	ft_strdel(&tmp);
 	return (len);

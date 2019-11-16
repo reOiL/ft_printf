@@ -148,8 +148,7 @@ int main()
 	printf("% 10x % 10x\n", -124, 124);
 	printf("% .5x % .5x\n", -124, 124);
 	printf("% 10.5x % 10.5x\n\n", -124, 124);
-	*/
-	/*
+
 	printf("%s", "space flag\n");
 	ft_printf("% u % u\n", -124, 124);
 	ft_printf("% 10u % 10u\n", -124, 124);
@@ -163,35 +162,10 @@ int main()
 	printf("% 10.5u % 10.5u\n", -124, 124);
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
-	 */
-	/*
-	ft_printf("%f\n", 1.1234);
-	printf("%f\n", 1.1234);
-	ft_printf("%f\n", 0.1234);
-	printf("%f\n", 0.1234);
-	ft_printf("%f\n", 1447432.1234);
-	printf("%f\n", 1447432.1234);
-	ft_printf("%f\n", 1447432.123456);
-	printf("%f\n", 1447432.123456);
-	ft_printf("%f\n", 1447432.123456789);
-	printf("%f\n", 1447432.123456789);
-	ft_printf("%.8f\n", 1447432.123456789);
-	printf("%.8f\n", 1447432.123456789);
-	ft_printf("%.0f\n", 1447432.123456789);
-	printf("%f\n", 1447432.123456789);
-	ft_printf("%f\n", -1447432.123456789);
-	printf("%f\n", -1447432.123456789);
 	*/
-	ft_printf("%20f\n", -1447432.123456789);
-	printf("%20f\n", -1447432.123456789);
-	ft_printf("%-20f\n", -1447432.123456789);
-	printf("%-20f\n", -1447432.123456789);
-	ft_printf("% f\n", -1447432.123456789);
-	printf("% f\n", -1447432.123456789);
-	ft_printf("%+f\n", 1447432.123456789);
-	printf("%+f\n", 1447432.123456789);
-	ft_printf("%+Lf\n", (long double)(1e+37) + 1);
-	printf("%+Lf\n", (long double)(1e+37) + 1);
+	int a = ft_printf("%lld", -9223372036854775808);
+	int b = printf("%lld", -9223372036854775808);
+	printf("%d %d\n", a, b);
 	free(str);
 	return (0);
 }

@@ -35,7 +35,7 @@ char 	get_type(const char *str)
 		return (*str);
 	else if (*str == 'u' || *str == 'x' || *str == 'X')
 		return (*str);
-	else if (*str == 'f')
+	else if (*str == 'f' || *str == '%')
 		return (*str);
 	else
 		return (0);
@@ -62,6 +62,7 @@ int 	get_precision(const char *str, int *i)
 	if (*str++ == '.')
 	{
 		(*i)++;
+		precision = 0;
 		while (ft_isdigit(*str))
 		{
 			precision = precision == -1 ? *str - '0' : (*str - '0') + precision * 10;

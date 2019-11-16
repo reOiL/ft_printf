@@ -71,11 +71,11 @@ add_executable(ft_printf
         libft/ft_toupper.c
         libft/ft_wcount.c
         libft/libft.h
-        floating.h
         ft_itoa_base.c
         ft_itoa_base_uns.c
         ft_printf.c
         ft_printf.h
+        ft_putnbr_longlong.c
         get_format.c
         helper_numbers.c
         main.c
@@ -83,4 +83,5 @@ add_executable(ft_printf
         print_chars_helper.c
         print_float.c
         print_ints_helper.c
-        print_uns_helper.c)
+        print_percent_helper.c
+        print_uns_helper.c helper_numbers2.c)

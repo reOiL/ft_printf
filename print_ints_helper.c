@@ -2,23 +2,17 @@
 
 int		print_reverse_int(t_integers data, t_format format, int count)
 {
-	int 	sign;
-	int 	prec;
+	int		sign;
 
 	sign = is_neg(data.ll) || (format.flags & FLAG_PLUS);
-	prec = format.precision;
 	count += print_sign(&data, format);
-	while (prec-- > count_digits(data.ll, 10))
-	{
-		count++;
-		ft_putchar('0');
-	}
 	count += put_nbr_base(format, data, 10, 0);
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision, count_digits(data.ll, 10)) + sign)
+		while (format.width > ft_max(format.precision, \
+					count_digits(data.ll, 10)) + sign)
 		{
-			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
+			ft_putchar( ' ');
 			format.width--;
 			count++;
 		}
@@ -28,28 +22,28 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 
 int 	print_modified_int(t_integers data, t_format format)
 {
-	int 	count;
-	int 	sign;
+	int		count;
+	int		sign;
+	int 	minus;
 
 	count = 0;
-	sign = (is_neg(data.ll) || (format.flags & FLAG_PLUS));
+	minus = is_neg(data.ll);
+	sign = (is_neg(data.ll) || format.flags & FLAG_PLUS || format.flags & FLAG_SPACE);
 	if (format.flags & FLAG_MINUS)
 		return (print_reverse_int(data, format, count));
+	count += (format.flags & FLAG_ZERO) ? print_sign(&data, format) : 0;
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision + sign, count_digits(data.ll, 10) + ((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && data.ll > 0)))
+		while (format.width > ft_max(format.precision + sign, \
+	count_digits(data.ll, 10) + (format.flags & FLAG_PLUS || \
+		format.flags & FLAG_SPACE || ((format.flags & FLAG_ZERO) && minus))))
 		{
-			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
+			ft_putchar((format.flags & FLAG_ZERO) && format.precision < 0 ? '0' : ' ');
 			format.width--;
 			count++;
 		}
 	}
-	count += print_sign(&data, format);
-	while (format.precision-- > count_digits(data.ll, 10))
-	{
-		count++;
-		ft_putchar('0');
-	}
+	count += !(format.flags & FLAG_ZERO) ? print_sign(&data, format) : 0;
 	return (count + put_nbr_base(format, data, 10, 0));
 }
 
@@ -62,9 +56,9 @@ int		print_int(t_format format, va_list args)
 	else if (format.modifier & MOD_HH)
 		data.ll = (signed char)va_arg(args, int);
 	else if (format.modifier & MOD_L)
-		data.ll = (long int)va_arg(args, long int);
+		data.ll = (long)va_arg(args, long);
 	else if (format.modifier & MOD_LL)
-		data.ll = (long long)va_arg(args, long long int);
+		data.ll = (long long)va_arg(args, long long);
 	else
 		data.ll = (int)va_arg(args, int);
 	return (print_modified_int(data, format));

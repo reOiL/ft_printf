@@ -39,6 +39,8 @@ int 		print_address(t_format format, va_list args)
 
 	width = format.width;
 	n.ull = va_arg(args, unsigned long long);
+	if (check_zero_number(format, n))
+		return (ft_putstr_size(ft_strdup("0x"), 3));
 	num = ft_itoa_base_uns(n.ull, 16);
 	if (format.flags & FLAG_MINUS)
 	{
