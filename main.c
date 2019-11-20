@@ -165,8 +165,8 @@ int main()
 	*/
 	//int a = ft_printf("%.13Lf\n", (long double)1444565444646.6465424242242);
 	//int b = printf("%.13Lf\n", (long double)1444565444646.6465424242242);
-	int a = ft_printf("{%f}{%lf}{%Lf}\n", -1.42, -1.42, -1.42l);
-	int b = printf("{%f}{%lf}{%Lf}\n", -1.42, -1.42, -1.42l);
+	int a = ft_printf("{+%f}{%+f}{%+f}{%+f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0);
+	int b = printf("{+%f}{%+f}{%+f}{%+f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0);
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);

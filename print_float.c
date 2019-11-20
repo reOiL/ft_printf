@@ -6,16 +6,12 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 15:15:51 by jwebber           #+#    #+#             */
-/*   Updated: 2019/11/16 15:23:23 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/11/20 15:49:55 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-char			*float_leading(long double d)
-{
-	return (ft_itoa_base((long long)d, 10));
-}
+#include "floating.h"
 
 char			*float_fraction(long double d, int *precision)
 {
@@ -57,12 +53,13 @@ size_t			putchar_count(char c, size_t count)
 	return (count);
 }
 
-int				print_float2(t_format format, char *leading, char *fraction)
+int				print_float2(t_format format, char *leading, char *fraction,
+		long double d)
 {
 	int	size;
 
 	size = ft_strlen(leading) + ft_strlen(fraction);
-	if (format.flags & FLAG_PLUS)
+	if (format.flags & FLAG_PLUS && d >= 0)
 	{
 		size++;
 		ft_putchar('+');
@@ -78,6 +75,28 @@ int				print_float2(t_format format, char *leading, char *fraction)
 	return (size);
 }
 
+int				handle_spec(char **leading, char **fraction, long double d)
+{
+	if (!(*fraction = ft_strdup("")))
+		return (-1);
+	if (d == PINF && !(*leading = ft_strdup("inf")))
+	{
+		ft_strdel(fraction);
+		return (-1);
+	}
+	if (d == MINF && !(*leading = ft_strdup("-inf")))
+	{
+		ft_strdel(fraction);
+		return (-1);
+	}
+	if (d != d && !(*leading = ft_strdup("nan")))
+	{
+		ft_strdel(fraction);
+		return (-1);
+	}
+	return (1);
+}
+
 int				print_float(t_format format, va_list args)
 {
 	long double	d;
@@ -88,12 +107,20 @@ int				print_float(t_format format, va_list args)
 		d = va_arg(args, long double);
 	else
 		d = va_arg(args, double);
-	if (!(leading = float_leading(d)))
-		return (0);
-	if (!(fraction = float_fraction(d, &format.precision)))
+	if (d == PINF || d == MINF || d != d)
 	{
-		ft_strdel(&leading);
-		return (0);
+		if (handle_spec(&leading, &fraction, d) < 0)
+			return (0);
 	}
-	return (print_float2(format, leading, fraction));
+	else
+	{
+		if (!(leading = ft_itoa_base((long long)d, 10)))
+			return (0);
+		if (!(fraction = float_fraction(d, &format.precision)))
+		{
+			ft_strdel(&leading);
+			return (0);
+		}
+	}
+	return (print_float2(format, leading, fraction, d));
 }

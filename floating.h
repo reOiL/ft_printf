@@ -1,14 +1,19 @@
-//
-// Created by reoil on 07.11.2019.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floating.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/20 15:42:48 by jwebber           #+#    #+#             */
+/*   Updated: 2019/11/20 15:43:13 by jwebber          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef GIT_PRINTF_FLOATING_H
-#define GIT_PRINTF_FLOATING_H
+#ifndef FLOATING_H
+# define FLOATING_H
 
-typedef struct	s_floating
-{
-    int sign;
-    int order;
-    int mantisa;
-}               t_floating;
-#endif //GIT_PRINTF_FLOATING_H
+# define PINF 1/0.f
+# define MINF -PINF
+
+#endif
