@@ -20,10 +20,10 @@ char			*float_fraction(long double d, int *precision)
 	int		i;
 
 	*precision = *precision < 0 ? 6 : *precision;
+	if (*precision == 0 || ((long long)d == 0 && *precision == 0))
+		return (ft_strdup(""));
 	if (!(ret = ft_strnew(*precision + (precision != 0))))
 		return (NULL);
-	if (*precision == 0)
-		return (ret);
 	d = (d < 0 ? -d : d);
 	d -= (long long)d;
 	accur = 5;
@@ -63,6 +63,11 @@ int				print_float2(t_format format, char *leading, char *fraction,
 	{
 		size++;
 		ft_putchar('+');
+	}
+	if ((long long)d == 0 && d < 0)
+	{
+		size++;
+		ft_putchar('-');
 	}
 	if (format.width > 0 && format.width > size && !(format.flags & FLAG_MINUS))
 		size += putchar_count(' ', format.width - size);
