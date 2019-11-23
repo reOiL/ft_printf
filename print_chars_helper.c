@@ -65,7 +65,8 @@ int			print_string(t_format format, va_list args)
 
 	i = 0;
 	if (!(str = ft_strdup(va_arg(args, char*))))
-		return (ft_putstr_size(ft_strdup("(null)"), 6));
+		if (!(str = ft_strdup("(null)")))
+			return (0);
 	length = format.precision < (int)ft_strlen(str) && format.precision != -1 \
 				? format.precision : (int)ft_strlen(str);
 	if (format.flags & FLAG_MINUS)
