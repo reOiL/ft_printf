@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_addr_helper.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:45:47 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:46:56 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 long long	ft_max(long long a, long long b)
@@ -5,9 +17,9 @@ long long	ft_max(long long a, long long b)
 	return (a > b ? a : b);
 }
 
-char 		*str_tolower(char *str)
+char		*str_tolower(char *str)
 {
-	int 	i;
+	int		i;
 
 	i = -1;
 	while (str[++i])
@@ -15,13 +27,14 @@ char 		*str_tolower(char *str)
 	return (str);
 }
 
-char 		*get_addr_precision(char *num, int precision)
+char		*get_addr_precision(char *num, int precision)
 {
-	int 	i;
+	int		i;
 	char	*new_num;
 
 	i = 2;
-	new_num = precision > 0 ? ft_strnew(precision + 2) : ft_strnew(ft_strlen(num) + 2);
+	new_num = precision > 0 ? ft_strnew(precision + 2) \
+				: ft_strnew(ft_strlen(num) + 2);
 	new_num = ft_strcpy(new_num, "0x");
 	while (precision-- > (int)(ft_strlen(num)))
 		new_num[i++] = '0';
@@ -30,12 +43,12 @@ char 		*get_addr_precision(char *num, int precision)
 	return (new_num);
 }
 
-int 		print_address(t_format format, va_list args)
+int			print_address(t_format format, va_list args)
 {
-	int 		length;
-	int 		width;
+	int			length;
+	int			width;
 	t_integers	n;
-	char 		*num;
+	char		*num;
 
 	width = format.width;
 	n.ull = va_arg(args, unsigned long long);

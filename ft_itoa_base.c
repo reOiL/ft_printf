@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:28:50 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:29:40 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		calc_len(long long val, int base)
 {
 	if (val == 0)
 		return (1);
-	return calc_len(val / base, base) + 1;
+	return (calc_len(val / base, base) + 1);
 }
 
 char	cast_base(unsigned short val)
 {
-	char 		c;
+	char		c;
 
 	c = '0';
 	if (val >= 0 && val <= 9)
@@ -28,9 +40,9 @@ void	itoa_2(char **array, long long val, int base, long long index)
 
 char	*ft_itoa_base(long long ll, int base)
 {
-	char 		*array;
-	long long 	len;
-	int 		is_minus;
+	char		*array;
+	long long	len;
+	int			is_minus;
 
 	if (base < 2 || base > 16)
 		return (ft_strdup("0"));

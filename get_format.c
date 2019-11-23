@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_format.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:36:50 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:43:01 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-unsigned int get_flags(const char *str, int *it)
+unsigned int		get_flags(const char *str, int *it)
 {
-	unsigned int res;
+	unsigned int	res;
 
 	res = 0;
 	if (str == NULL || it == NULL)
@@ -20,14 +32,14 @@ unsigned int get_flags(const char *str, int *it)
 		else if (*str == '0')
 			res |= FLAG_ZERO;
 		else
-			break;
+			break ;
 		(*it)++;
 		str++;
 	}
 	return (res);
 }
 
-char 	get_type(const char *str)
+char				get_type(const char *str)
 {
 	if (*str == 'c' || *str == 's' || *str == 'p')
 		return (*str);
@@ -41,9 +53,9 @@ char 	get_type(const char *str)
 		return (0);
 }
 
-int 	get_width(const char *str, int *i)
+int					get_width(const char *str, int *i)
 {
-	int 	width;
+	int				width;
 
 	width = 0;
 	while (ft_isdigit(*str))
@@ -54,9 +66,9 @@ int 	get_width(const char *str, int *i)
 	return (width);
 }
 
-int 	get_precision(const char *str, int *i)
+int					get_precision(const char *str, int *i)
 {
-	int 	precision;
+	int				precision;
 
 	precision = -1;
 	if (*str++ == '.')
@@ -65,7 +77,8 @@ int 	get_precision(const char *str, int *i)
 		precision = 0;
 		while (ft_isdigit(*str))
 		{
-			precision = precision == -1 ? *str - '0' : (*str - '0') + precision * 10;
+			precision = precision == -1 ? \
+			*str - '0' : (*str - '0') + precision * 10;
 			str++;
 			(*i)++;
 		}
@@ -73,7 +86,7 @@ int 	get_precision(const char *str, int *i)
 	return (precision);
 }
 
-int		get_modifier(const char *str, int *i)
+int					get_modifier(const char *str, int *i)
 {
 	if (*str == 'l')
 	{

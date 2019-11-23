@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_ints_helper.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:48:40 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:49:56 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		print_reverse_int(t_integers data, t_format format, int count)
@@ -12,7 +24,7 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 		while (format.width > ft_max(format.precision, \
 					count_digits(data.ll, 10)) + sign)
 		{
-			ft_putchar( ' ');
+			ft_putchar(' ');
 			format.width--;
 			count++;
 		}
@@ -20,15 +32,16 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 	return (count);
 }
 
-int 	print_modified_int(t_integers data, t_format format)
+int		print_modified_int(t_integers data, t_format format)
 {
 	int		count;
 	int		sign;
-	int 	minus;
+	int		minus;
 
 	count = 0;
 	minus = is_neg(data.ll);
-	sign = (is_neg(data.ll) || format.flags & FLAG_PLUS || format.flags & FLAG_SPACE);
+	sign = (is_neg(data.ll) || format.flags & FLAG_PLUS \
+			|| format.flags & FLAG_SPACE);
 	if (format.flags & FLAG_MINUS)
 		return (print_reverse_int(data, format, count));
 	count += (format.flags & FLAG_ZERO) ? print_sign(&data, format) : 0;
@@ -38,7 +51,8 @@ int 	print_modified_int(t_integers data, t_format format)
 	count_digits(data.ll, 10) + (format.flags & FLAG_PLUS || \
 		format.flags & FLAG_SPACE || ((format.flags & FLAG_ZERO) && minus))))
 		{
-			ft_putchar((format.flags & FLAG_ZERO) && format.precision < 0 ? '0' : ' ');
+			ft_putchar((format.flags & FLAG_ZERO) && \
+					format.precision < 0 ? '0' : ' ');
 			format.width--;
 			count++;
 		}
@@ -49,7 +63,7 @@ int 	print_modified_int(t_integers data, t_format format)
 
 int		print_int(t_format format, va_list args)
 {
-	t_integers  data;
+	t_integers	data;
 
 	if (format.modifier & MOD_H)
 		data.ll = (short)va_arg(args, int);

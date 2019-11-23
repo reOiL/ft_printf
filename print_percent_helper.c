@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_percent_helper.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/16 14:50:14 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/11/16 14:50:33 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int 	print_percent(t_format format)
+int		print_percent(t_format format)
 {
-	int 	count;
+	int		count;
 
 	count = 0;
 	if (format.flags & FLAG_MINUS)
