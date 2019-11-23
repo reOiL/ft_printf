@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include "floating.h"
 
-char			*float_fraction(long double d, int *precision)
+char			*float_fraction(long double d, int *precision, t_format format)
 {
 	char	*ret;
 	double	accur;
@@ -21,7 +21,7 @@ char			*float_fraction(long double d, int *precision)
 
 	*precision = *precision < 0 ? 6 : *precision;
 	if (*precision == 0 || ((long long)d == 0 && *precision == 0))
-		return (ft_strdup(""));
+		return format.flags & FLAG_SHARP ? ft_strdup(".") : ft_strdup("");
 	if (!(ret = ft_strnew(*precision + (precision != 0))))
 		return (NULL);
 	d = (d < 0 ? -d : d);
@@ -37,6 +37,7 @@ char			*float_fraction(long double d, int *precision)
 	{
 		d *= 10;
 		ret[++i] = ('0' + (unsigned long long)d % 10);
+		d -= (long long)d;
 	}
 	return (ret);
 }
@@ -59,10 +60,10 @@ int				print_float2(t_format format, char *leading, char *fraction,
 	int	size;
 
 	size = ft_strlen(leading) + ft_strlen(fraction);
-	if (format.flags & FLAG_PLUS && d >= 0)
+	if ((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && d >= 0)
 	{
 		size++;
-		ft_putchar('+');
+		ft_putchar(format.flags & FLAG_PLUS ? '+' : ' ');
 	}
 	if ((long long)d == 0 && d < 0)
 	{
@@ -121,7 +122,7 @@ int				print_float(t_format format, va_list args)
 	{
 		if (!(leading = ft_itoa_base((long long)d, 10)))
 			return (0);
-		if (!(fraction = float_fraction(d, &format.precision)))
+		if (!(fraction = float_fraction(d, &format.precision, format)))
 		{
 			ft_strdel(&leading);
 			return (0);
