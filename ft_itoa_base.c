@@ -49,8 +49,8 @@ char	*ft_itoa_base(long long ll, int base)
 	is_minus = 0;
 	if ((unsigned long long)ll == (unsigned long long)MIN_LLONG + 1)
 		return (ft_strdup("9223372036854775808"));
-	if (ll == MIN_LONG)
-		return (ft_strdup("2147483648"));
+	//if (ll == MIN_LONG)
+	//	return (ft_strdup("2147483648"));
 	if (ll < 0)
 	{
 		if (base == 10)

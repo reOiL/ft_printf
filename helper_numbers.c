@@ -84,8 +84,11 @@ int		put_nbr_base(t_format format, t_integers val, int base, int uns_sign)
 	}
 	if (uns_sign)
 		tmp = ft_itoa_base_uns(val.ull, base);
-	else
+	else {
+		if (val.ll < 0)
+			ft_putchar('-');
 		tmp = ft_itoa_base(val.ll, base);
+	}
 	len = ft_strlen(tmp);
 	while (format.precision-- > count_digits_uns(val.ull, base))
 	{

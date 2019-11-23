@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <float.h>
+#include <limits.h>
 
 int main()
 {
@@ -164,10 +165,10 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	//int a = ft_printf("%.13Lf\n", (long double)1444565444646.6465424242242);
-	//int b = printf("%.13Lf\n", (long double)1444565444646.6465424242242);
-	int a = ft_printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
-	int b = printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
+	int a = ft_printf("%.20f\n",        1.025978542436587568678);
+	int b = printf("%.20f\n",        1.025978542436587568678);
+	//int a = ft_printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
+	//int b = printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);

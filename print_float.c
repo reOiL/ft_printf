@@ -13,10 +13,22 @@
 #include "ft_printf.h"
 #include "floating.h"
 
+long double		accureit(long double d, t_format format)
+{
+	double	accur;
+	int i;
+
+	accur = 5;
+	i = 0;
+	format.precision = format.precision < 0 ? 6 : format.precision;
+	while (i++ < format.precision + 1)
+		accur /= 10;
+	return (d + (d > 0 ? accur : -accur));
+}
+
 char			*float_fraction(long double d, int *precision, t_format format)
 {
 	char	*ret;
-	double	accur;
 	int		i;
 
 	*precision = *precision < 0 ? 6 : *precision;
@@ -25,19 +37,14 @@ char			*float_fraction(long double d, int *precision, t_format format)
 	if (!(ret = ft_strnew(*precision + (precision != 0))))
 		return (NULL);
 	d = (d < 0 ? -d : d);
-	d -= (long long)d;
-	accur = 5;
-	i = 0;
-	while (i++ < *precision + 1)
-		accur /= 10;
+	d = accureit(d, format);
 	i = 0;
 	ret[0] = '.';
-	d += accur;
+	d -= (long long)d;
 	while (i < *precision)
 	{
 		d *= 10;
 		ret[++i] = ('0' + (unsigned long long)d % 10);
-		d -= (long long)d;
 	}
 	return (ret);
 }
@@ -120,7 +127,7 @@ int				print_float(t_format format, va_list args)
 	}
 	else
 	{
-		if (!(leading = ft_itoa_base((long long)d, 10)))
+		if (!(leading = ft_itoa_base((long long)accureit(d, format), 10)))
 			return (0);
 		if (!(fraction = float_fraction(d, &format.precision, format)))
 		{
