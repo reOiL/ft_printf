@@ -163,8 +163,8 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("% +24d\n", 42);
-	int b = printf("% +24d\n", 42);
+	int a = ft_printf("%#8.5o\n", 34);
+	int b = printf("%#8.5o\n", 34);
 	/*
 	a += ft_printf("%7d\n", -42);
 	b += printf("%7d\n", -42);
