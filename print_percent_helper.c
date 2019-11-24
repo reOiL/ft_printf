@@ -11,7 +11,7 @@ int 	print_percent(t_format format)
 		count++;
 		while (count < format.width)
 		{
-			ft_putchar(format.flags & FLAG_ZERO ? '0' : ' ');
+			ft_putchar(' ');
 			count++;
 		}
 		return (count);

@@ -163,8 +163,16 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("%lld", -9223372036854775808);
-	int b = printf("%lld", -9223372036854775808);
+	int a = ft_printf("% +24d\n", 42);
+	int b = printf("% +24d\n", 42);
+	/*
+	a += ft_printf("%7d\n", -42);
+	b += printf("%7d\n", -42);
+	a += ft_printf("%07d\n", 42);
+	b += printf("%07d\n", 42);
+	a += ft_printf("%7d\n", 42);
+	b += printf("%7d\n", 42);
+	 */
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);

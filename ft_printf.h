@@ -93,7 +93,7 @@ char					*ft_itoa_base_uns(unsigned long long ull, int base);
 
 //helper_numbers.c
 int 					is_neg(long long val);
-int 					print_sign(t_integers *data, t_format format);
+int 					print_sign(t_integers *data, t_format *format);
 int						count_digits(long long value, int base);
 int						count_digits_uns(unsigned long long value, int base);
 int             		put_nbr_base(t_format format, t_integers val, int base, int uns_sign);
