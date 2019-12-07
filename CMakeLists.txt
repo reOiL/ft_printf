@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.15)
 project(test_printf C)
 
 set(CMAKE_C_STANDARD 11)
@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 include_directories(libft)
 
-add_executable(ft_printf
+add_executable(test_printf
         libft/ft_atoi.c
         libft/ft_bzero.c
         libft/ft_isalnum.c
@@ -71,6 +71,7 @@ add_executable(ft_printf
         libft/ft_toupper.c
         libft/ft_wcount.c
         libft/libft.h
+        floating.h
         ft_itoa_base.c
         ft_itoa_base_uns.c
         ft_printf.c
@@ -82,6 +83,7 @@ add_executable(ft_printf
         print_addr_helper.c
         print_chars_helper.c
         print_float.c
+        print_float2.c
         print_ints_helper.c
         print_percent_helper.c
         print_uns_helper.c)

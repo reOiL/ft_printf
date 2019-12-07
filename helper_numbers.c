@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_numbers.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/07 16:09:42 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/12/07 16:11:05 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int 	is_neg(long long val)
+int		is_neg(long long val)
 {
 	return (val < 0);
 }
 
-int 	print_sign(t_integers *data, t_format *format)
+int		print_sign(t_integers *data, t_format *format)
 {
 	if ((*data).ll < 0)
 	{
 		ft_putchar('-');
-		if (!((*data).ull == MIN_LLONG && (*format).modifier & MOD_LL))
+		if (!(((*data).ull == MIN_LLONG && (*format).modifier & MOD_LL)))
 		{
 			(*data).ll = -(*data).ll;
 			(*format).width--;
@@ -32,7 +44,7 @@ int 	print_sign(t_integers *data, t_format *format)
 	return (0);
 }
 
-int 	count_digits(long long int value, int base)
+int		count_digits(long long int value, int base)
 {
 	int		i;
 
@@ -50,7 +62,7 @@ int 	count_digits(long long int value, int base)
 	return (i);
 }
 
-int 			count_digits_uns(unsigned long long value, int base)
+int		count_digits_uns(unsigned long long value, int base)
 {
 	int		i;
 
@@ -63,10 +75,10 @@ int 			count_digits_uns(unsigned long long value, int base)
 	return (i);
 }
 
-int             put_nbr_base(t_format format, t_integers val, int base, int uns_sign)
+int		put_nbr_base(t_format format, t_integers val, int base, int uns_sign)
 {
-	char 		*tmp;
-	size_t 		len;
+	char		*tmp;
+	size_t		len;
 
 	len = 0;
 	if (check_zero_number(format, val))

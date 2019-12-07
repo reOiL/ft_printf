@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:42:23 by jwebber           #+#    #+#             */
-/*   Updated: 2019/10/26 16:42:24 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:28:42 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int			print_value(t_format format, va_list args)
 		return (print_int(format, args));
 	else if (format.type == 'o' || format.type == 'u' ||\
 			format.type == 'x' || format.type == 'X')
-		return(print_int_unsigned(format, args));
+		return (print_int_unsigned(format, args));
 	else if (format.type == 'f')
-		return(print_float(format, args));
+		return (print_float(format, args));
 	return (0);
 }
 
@@ -39,8 +39,8 @@ int			get_format(va_list args, const char *str, int *printed_count)
 
 	i = 1;
 	format.flags = get_flags(&str[i], &i);
-	format.width = get_width(&str[i], &i);
-	format.precision = get_precision(&str[i], &i);
+	format.width = get_width(&str[i], &i, args, &format);
+	format.precision = get_precision(&str[i], &i, args);
 	format.modifier = get_modifier(&str[i], &i);
 	format.type = get_type(&str[i]);
 	if (format.type)
@@ -69,16 +69,10 @@ int			ft_printf(const char *str, ...)
 			if (offset)
 				i += offset;
 			else if (str[++i])
-			{
-				ft_putchar(str[i]);
-				printed_count++;
-			}
+				printed_count += ft_putchar_one(str[i]);
 		}
 		else
-		{
-			ft_putchar(str[i++]);
-			printed_count++;
-		}
+			printed_count += ft_putchar_one(str[i++]);
 	}
 	va_end(args);
 	return (printed_count);

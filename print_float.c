@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 15:15:51 by jwebber           #+#    #+#             */
-/*   Updated: 2019/11/20 15:49:55 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/12/07 15:32:37 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 long double		accureit(long double d, t_format format)
 {
 	double	accur;
-	int i;
+	int		i;
 
 	accur = 5;
 	i = 0;
@@ -33,7 +33,7 @@ char			*float_fraction(long double d, int *precision, t_format format)
 
 	*precision = *precision < 0 ? 6 : *precision;
 	if (*precision == 0 || ((long long)d == 0 && *precision == 0))
-		return format.flags & FLAG_SHARP ? ft_strdup(".") : ft_strdup("");
+		return (format.flags & FLAG_SHARP ? ft_strdup(".") : ft_strdup(""));
 	if (!(ret = ft_strnew(*precision + (precision != 0))))
 		return (NULL);
 	d = (d < 0 ? -d : d);
@@ -47,21 +47,9 @@ char			*float_fraction(long double d, int *precision, t_format format)
 		ret[++i] = ('0' + (unsigned long long)d % 10);
 	}
 	d -= (unsigned long long)d;
-	if (format.precision >= 20 && d * 10 >= 5 )
+	if (format.precision >= 20 && d * 10 >= 5)
 		ret[i] += 1;
 	return (ret);
-}
-
-size_t			putchar_count(char c, size_t count)
-{
-	char	*p;
-
-	if (!(p = ft_strnew(count)))
-		return (0);
-	ft_memset(p, c, count);
-	ft_putstr(p);
-	ft_strdel(&p);
-	return (count);
 }
 
 int				print_float2(t_format format, char *leading, char *fraction,

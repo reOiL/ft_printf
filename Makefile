@@ -21,6 +21,7 @@ SRC = ft_itoa_base.c \
         print_uns_helper.c \
         print_percent_helper.c \
         print_float.c \
+        print_float2.c \
         helper_numbers2.c \
         libft/ft_atoi.c libft/ft_bzero.c libft/ft_isalnum.c libft/ft_isalpha.c libft/ft_isascii.c libft/ft_isdigit.c libft/ft_isprint.c \
         libft/ft_isspace.c libft/ft_itoa.c libft/ft_lstadd.c libft/ft_lstdel.c libft/ft_lstdelone.c libft/ft_lstiter.c libft/ft_lstmap.c \
