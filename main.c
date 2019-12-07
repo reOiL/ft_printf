@@ -10,8 +10,8 @@ int main()
 {
 	char 	*str;
 	str = strdup("abcde");
-	ft_printf("%+*d\n", 5, 42);
-	printf("{%*d}", -5, 42);
+	ft_printf("{%*3d}\n", 5, 0);
+	printf("{%*3d}", 5, 0);
 	free(str);
 	return (0);
 }

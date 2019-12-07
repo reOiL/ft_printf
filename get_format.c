@@ -53,7 +53,7 @@ char				get_type(const char *str)
 		return (0);
 }
 
-int					get_width(const char *str, int *i, va_list args)
+int					get_width(const char *str, int *i, va_list args, t_format *format)
 {
 	int				width;
 
@@ -61,7 +61,15 @@ int					get_width(const char *str, int *i, va_list args)
 	if (*str == '*')
 	{
 		(*i)++;
-		return va_arg(args, int);
+		str++;
+		format->width = va_arg(args, int);
+		if (format->width < 0)
+		{
+			format->width *= -1;
+			format->flags |= FLAG_MINUS;
+		}
+		if (!ft_isdigit(*str))
+			width = format->width;
 	}
 	while (ft_isdigit(*str))
 	{
@@ -81,8 +89,9 @@ int					get_precision(const char *str, int *i, va_list args)
 		(*i)++;
 		if (*str == '*')
 		{
+			precision = va_arg(args, int);
 			(*i)++;
-			return va_arg(args, int);
+			return precision < 0 ? -1 : precision;
 		}
 		precision = 0;
 		while (ft_isdigit(*str))

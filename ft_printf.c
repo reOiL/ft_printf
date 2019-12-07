@@ -39,7 +39,7 @@ int			get_format(va_list args, const char *str, int *printed_count)
 
 	i = 1;
 	format.flags = get_flags(&str[i], &i);
-	format.width = get_width(&str[i], &i, args);
+	format.width = get_width(&str[i], &i, args, &format);
 	format.precision = get_precision(&str[i], &i, args);
 	format.modifier = get_modifier(&str[i], &i);
 	format.type = get_type(&str[i]);
