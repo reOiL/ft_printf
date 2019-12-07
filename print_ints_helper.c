@@ -4,6 +4,7 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 {
 	count += print_sign(&data, &format);
 	count += put_nbr_base(format, data, 10, 0);
+	format.width = (format.flags & FLAG_PLUS) && format.precision == 0 && data.ll == 0 ? format.width + 1 : format.width;
 	if (format.width > format.precision)
 	{
 		while (format.width > ft_max(format.precision, \
@@ -24,11 +25,11 @@ int 	print_modified_int(t_integers data, t_format format)
 	int 	flag;
 
 	flag = (format.width > count_digits(data.ll, 10) && (format.flags & FLAG_SPACE)) || (format.flags & FLAG_PLUS) || (is_neg(data.ll));
-	width = format.width;
+	width = (format.flags & FLAG_PLUS) && format.precision == 0 && data.ll == 0 ? format.width + 1 : format.width;
 	count = 0;
-	count += ((format.flags & FLAG_ZERO) && (format.width < format.precision || format.precision < 0)) ? print_sign(&data, &format) : 0;
 	if (format.flags & FLAG_MINUS)
 		return (print_reverse_int(data, format, count));
+	count += ((format.flags & FLAG_ZERO) && (format.width < format.precision || format.precision < 0)) ? print_sign(&data, &format) : 0;
 	if (width > format.precision)
 	{
 		while (width - flag > ft_max(format.precision, count_digits(data.ll, 10) - is_neg(data.ll)))

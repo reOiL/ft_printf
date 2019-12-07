@@ -72,7 +72,7 @@ int             put_nbr_base(t_format format, t_integers val, int base, int uns_
 	len = 0;
 	if (check_zero_number(format, val))
 	{
-		if (format.width)
+		if (format.width && !(format.flags & FLAG_PLUS))
 			return (ft_putstr_size(ft_strdup(" "), 2));
 		return (0);
 	}
