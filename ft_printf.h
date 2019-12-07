@@ -105,8 +105,8 @@ int						print_int(t_format format, va_list args);
 
 //get_format.c
 unsigned int 			get_flags(const char *str, int *it);
-int 					get_width(const char *str, int *i);
-int 					get_precision(const char *str, int *i);
+int 					get_width(const char *str, int *i, va_list args);
+int 					get_precision(const char *str, int *i, va_list args);
 int						get_modifier(const char *str, int *i);
 char 					get_type(const char *str);
 
