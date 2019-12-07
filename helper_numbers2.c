@@ -24,3 +24,20 @@ int		check_zero_number(t_format format, t_integers val)
 		return (1);
 	return (0);
 }
+
+/*
+void		get_width_pres(t_integers data, t_format format, int *count)
+{
+	if (format.width > format.precision)
+	{
+		while (format.width > ft_max(format.precision + sign, \
+	count_digits(data.ll, 10) + (format.flags & FLAG_PLUS || \
+		format.flags & FLAG_SPACE || ((format.flags & FLAG_ZERO) && minus))))
+		{
+			ft_putchar((format.flags & FLAG_ZERO) && format.precision < 0 ? '0' : ' ');
+			format.width--;
+			count++;
+		}
+	}
+}
+ */

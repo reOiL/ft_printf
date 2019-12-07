@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(ft_printf C)
+project(test_printf C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -77,10 +77,11 @@ add_executable(ft_printf
         ft_printf.h
         get_format.c
         helper_numbers.c
+        helper_numbers2.c
         main.c
         print_addr_helper.c
         print_chars_helper.c
         print_float.c
         print_ints_helper.c
         print_percent_helper.c
-        print_uns_helper.c helper_numbers2.c)
+        print_uns_helper.c)

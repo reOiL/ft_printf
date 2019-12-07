@@ -5,8 +5,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
 #include <string.h>
-#include <float.h>
-#include <limits.h>
 
 int main()
 {
@@ -44,6 +42,7 @@ int main()
 	printf("%+10.5d %+10.5d\n", -124, 124);
 	printf("%-+10.5d %-+10.5d\n", -124, 124);
 	printf("%+-10.5d %+-10.5d\n\n", -124, 124);
+
 
 	printf("%s", "only precision\n");
 	ft_printf("%.5d %.5d\n", -124, 124);
@@ -90,7 +89,7 @@ int main()
 	printf("% 10d % 10d\n", -124, 124);
 	printf("% .5d % .5d\n", -124, 124);
 	printf("% 10.5d % 10.5d\n\n", -124, 124);
-	*/
+*/
 	/*
 	printf("%s", "width & precision\n");
 	ft_printf("%10.5x %10.5x\n", -124, 124);
@@ -165,51 +164,20 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a, b;
-	a = ft_printf("%f\n", -7.3);
-	b = printf("%f\n", -7.3);
-	a = ft_printf("%+f\n", 7.3);
-	b = printf("%+f\n", 7.3);
-	a = ft_printf("%#f\n", 7.3);
-	b = printf("%#f\n", 7.3);
-	a = ft_printf("% f\n", -7.3);
-	b = printf("% f\n", -7.3);
-	a = ft_printf("% f\n", 7.3);
-	b = printf("% f\n", 7.3);
-	a = ft_printf("%6.1f\n", 7.3);
-	b = printf("%6.1f\n", 7.3);
-	a = ft_printf("%+6.1f\n", 7.3);
-	b = printf("%+6.1f\n", 7.3);
-	a = ft_printf("%-+6.1f\n", 7.3);
-	b = printf("%-+6.1f\n", 7.3);
-	a = ft_printf("%0+6.1f\n", 7.3);
-	b = printf("%0+6.1f\n", 7.3);
-	a = ft_printf("% -05.1f\n", -7.3);
-	b = printf("% -05.1f\n", -7.3);
-	a = ft_printf("% -05.1f\n", 7.3);
-	b = printf("% -05.1f\n", 7.3);
-//	ft_printf("% 05.0f\n", -7.3);
-//	printf("% 05.0f\n", -7.3);
-//	a = ft_printf("%5.0f\n", -7.3);
-//	b = printf("%5.0f\n", -7.3);
-//	a = ft_printf("%+5.0f\n", 7.3);
-//	b = printf("%+5.0f\n", 7.3);
-//	a = ft_printf("%+5.0f\n", 0.f);
-//	b = printf("%+5.0f\n", 0.f);
-//	a = ft_printf("% 5.0f\n", -1.f);
-//	b = printf("% 5.0f\n", -1.f);
-//	a = ft_printf("%.0f\n", -1.f);
-//	b = printf("%.0f\n", -1.f);
-//	a = ft_printf("%- 5.6f\n", 7.3);
-//	b = printf("%- 5.6f\n", 7.3);
-//	a = ft_printf("%- 5.6f\n", -7.3);
-//	b = printf("%- 5.6f\n", -7.3);
-//	a = ft_printf("%- 10.6f\n", -7.3);
-//	b = printf("%- 10.6f\n", -7.3);
-//	a = ft_printf("%- 5.0f\n", -7.3);
-//	b = printf("%- 5.0f\n", -7.3);
-	//int a = ft_printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
-	//int b = printf("{+%f}{%+f}{%+f}{%+f}{%.12Lf}{% #-5.0f}{%.0Lf}{% +.0f}\n", 1/0.f, -1/0.f, 0.f, 0.0 / 0.0, -LDBL_MIN, -7.3, LDBL_MIN, -7.3);
+	int a = ft_printf("% 03d\n",5);
+	int b = printf("% 03d\n", 5);
+	a += ft_printf("%+05d\n", 34);
+	b += printf("%+05d\n", 34);
+	a += ft_printf("%+05d\n", 34);
+	b += printf("%+05d\n", 34);
+	/*
+	a += ft_printf("%7d\n", -42);
+	b += printf("%7d\n", -42);
+	a += ft_printf("%07d\n", 42);
+	b += printf("%07d\n", 42);
+	a += ft_printf("%7d\n", 42);
+	b += printf("%7d\n", 42);
+	 */
 	printf("%d %d\n", a, b);
 	free(str);
 	return (0);
