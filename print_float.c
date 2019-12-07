@@ -67,21 +67,24 @@ int				print_float2(t_format format, char *leading, char *fraction,
 	int	size;
 
 	size = ft_strlen(leading) + ft_strlen(fraction);
-	if ((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && d >= 0)
-	{
-		size++;
-		ft_putchar(format.flags & FLAG_PLUS ? '+' : ' ');
-	}
-	if ((long long)d == 0 && d < 0)
-	{
-		size++;
-		ft_putchar('-');
-	}
-	if (format.width > 0 && format.width > size && !(format.flags & FLAG_MINUS))
+	size += d < 0 ||
+			(d > 0 && format.flags & FLAG_PLUS) ||
+			(d > 0 && format.flags & FLAG_SPACE);
+	if (format.width > size && !(format.flags & FLAG_MINUS) &&
+	!(format.flags & FLAG_ZERO))
 		size += putchar_count(' ', format.width - size);
+	if (d < 0)
+		putchar_count('-', 1);
+	else if (d > 0 && format.flags & FLAG_PLUS)
+		putchar_count('+', 1);
+	else if (d > 0 && format.flags & FLAG_SPACE)
+		putchar_count(' ', 1);
+	if (format.flags & FLAG_ZERO && format.width > size &&
+	!(format.flags & FLAG_MINUS))
+		size += putchar_count('0', format.width - size);
 	ft_putstr(leading);
 	ft_putstr(fraction);
-	if (format.flags & FLAG_MINUS && format.width > 0 && format.width > size)
+	if (format.width > size && (format.flags & FLAG_MINUS))
 		size += putchar_count(' ', format.width - size);
 	ft_strdel(&leading);
 	ft_strdel(&fraction);
@@ -127,7 +130,8 @@ int				print_float(t_format format, va_list args)
 	}
 	else
 	{
-		if (!(leading = ft_itoa_base((long long)accureit(d, format), 10)))
+		if (!(leading = ft_itoa_base(d < 0 ? -(long long)accureit(d, format)
+				: (long long)accureit(d, format), 10)))
 			return (0);
 		if (!(fraction = float_fraction(d, &format.precision, format)))
 		{
