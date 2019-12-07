@@ -1,16 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_ints_helper.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/07 15:37:54 by eblackbu          #+#    #+#             */
+/*   Updated: 2019/12/07 15:38:32 by eblackbu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		print_reverse_int(t_integers data, t_format format, int count)
 {
 	count += print_sign(&data, &format);
 	count += put_nbr_base(format, data, 10, 0);
-	format.width = (format.flags & FLAG_PLUS) && format.precision == 0 && data.ll == 0 ? format.width + 1 : format.width;
+	format.width = (format.flags & FLAG_PLUS) && format.precision == 0 && \
+		data.ll == 0 ? format.width + 1 : format.width;
 	if (format.width > format.precision)
 	{
 		while (format.width > ft_max(format.precision, \
 					count_digits(data.ll, 10)))
 		{
-			ft_putchar( ' ');
+			ft_putchar(' ');
 			format.width--;
 			count++;
 		}
@@ -18,11 +31,11 @@ int		print_reverse_int(t_integers data, t_format format, int count)
 	return (count);
 }
 
-int 	print_modified_int(t_integers data, t_format format)
+int		print_modified_int(t_integers data, t_format format)
 {
 	int		count;
 	int		width;
-	int 	flag;
+	int		flag;
 
 	flag = (format.width > count_digits(data.ll, 10) && (format.flags & FLAG_SPACE)) || (format.flags & FLAG_PLUS) || (is_neg(data.ll));
 	width = (format.flags & FLAG_PLUS) && format.precision == 0 && data.ll == 0 ? format.width + 1 : format.width;
@@ -45,7 +58,7 @@ int 	print_modified_int(t_integers data, t_format format)
 
 int		print_int(t_format format, va_list args)
 {
-	t_integers  data;
+	t_integers	data;
 
 	if (format.modifier & MOD_H)
 		data.ll = (short)va_arg(args, int);
