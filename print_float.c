@@ -40,12 +40,15 @@ char			*float_fraction(long double d, int *precision, t_format format)
 	d = accureit(d, format);
 	i = 0;
 	ret[0] = '.';
-	d -= (long long)d;
 	while (i < *precision)
 	{
+		d -= (unsigned long long)d;
 		d *= 10;
 		ret[++i] = ('0' + (unsigned long long)d % 10);
 	}
+	d -= (unsigned long long)d;
+	if (format.precision >= 20 && d * 10 >= 5 )
+		ret[i] += 1;
 	return (ret);
 }
 

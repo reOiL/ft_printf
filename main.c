@@ -164,12 +164,8 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("% 03d\n",5);
-	int b = printf("% 03d\n", 5);
-	a += ft_printf("%+05d\n", 34);
-	b += printf("%+05d\n", 34);
-	a += ft_printf("%+05d\n", 34);
-	b += printf("%+05d\n", 34);
+	int a = ft_printf("%.20f\n", 1.025978542436587568678);
+	int b = printf("%.20f\n", 1.025978542436587568678);
 	/*
 	a += ft_printf("%7d\n", -42);
 	b += printf("%7d\n", -42);
