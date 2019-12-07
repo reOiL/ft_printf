@@ -43,6 +43,7 @@ int main()
 	printf("%-+10.5d %-+10.5d\n", -124, 124);
 	printf("%+-10.5d %+-10.5d\n\n", -124, 124);
 
+
 	printf("%s", "only precision\n");
 	ft_printf("%.5d %.5d\n", -124, 124);
 	ft_printf("%-.5d %-.5d\n", -124, 124);
@@ -88,7 +89,7 @@ int main()
 	printf("% 10d % 10d\n", -124, 124);
 	printf("% .5d % .5d\n", -124, 124);
 	printf("% 10.5d % 10.5d\n\n", -124, 124);
-	*/
+*/
 	/*
 	printf("%s", "width & precision\n");
 	ft_printf("%10.5x %10.5x\n", -124, 124);
@@ -163,8 +164,12 @@ int main()
 	printf("%# u %# u\n", -124, 124);
 	printf("%0 u %0 u\n", -124, 124);
 	*/
-	int a = ft_printf("%#8.5o\n", 34);
-	int b = printf("%#8.5o\n", 34);
+	int a = ft_printf("% 03d\n",5);
+	int b = printf("% 03d\n", 5);
+	a += ft_printf("%+05d\n", 34);
+	b += printf("%+05d\n", 34);
+	a += ft_printf("%+05d\n", 34);
+	b += printf("%+05d\n", 34);
 	/*
 	a += ft_printf("%7d\n", -42);
 	b += printf("%7d\n", -42);

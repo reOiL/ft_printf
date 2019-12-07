@@ -12,18 +12,22 @@ int 	print_sign(t_integers *data, t_format *format)
 		ft_putchar('-');
 		if (!(((*data).ll == MIN_LONG && (*format).modifier & MOD_L) \
 		|| ((*data).ull == MIN_LLONG && (*format).modifier & MOD_LL)))
+		{
 			(*data).ll = -(*data).ll;
+			(*format).width--;
+		}
 		return (1);
 	}
-	else if ((*format).flags & FLAG_PLUS && (*data).ll >= 0)
+	else if (((*format).flags & FLAG_PLUS) && (*data).ll >= 0)
 	{
 		ft_putchar('+');
+		(*format).width--;
 		return (1);
 	}
-	else if ((*format).flags & FLAG_SPACE && (*data).ll >= 0)
+	else if (((*format).flags & FLAG_SPACE) && (*data).ll >= 0)
 	{
 		ft_putchar(' ');
-
+		(*format).width--;
 		return (1);
 	}
 	return (0);
@@ -75,11 +79,7 @@ int             put_nbr_base(t_format format, t_integers val, int base, int uns_
 	if (uns_sign)
 		tmp = ft_itoa_base_uns(val.ull, base);
 	else
-		{
-		if (((format.flags & FLAG_PLUS && !(format.width > format.precision && (format.flags & FLAG_ZERO)))) || (val.ll < 0 && !(format.width > format.precision && (format.flags & FLAG_ZERO))) || format.flags & FLAG_MINUS)
-			len += print_sign(&val, &format);
 		tmp = ft_itoa_base(val.ll, base);
-	}
 	len += ft_strlen(tmp);
 	while (format.precision-- > (int)ft_strlen(tmp))
 	{
