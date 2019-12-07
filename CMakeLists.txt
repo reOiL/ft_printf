@@ -5,7 +5,6 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
 include_directories(libft)
-include_directories(pft/src)
 
 add_executable(test_printf
         libft/ft_atoi.c
@@ -72,20 +71,6 @@ add_executable(test_printf
         libft/ft_toupper.c
         libft/ft_wcount.c
         libft/libft.h
-        pft/configurations/42fc/unit_tests.42fc.c
-        pft/src/help.c
-        pft/src/help.h
-        pft/src/help_conf.c
-        pft/src/history.c
-        pft/src/main.c
-        pft/src/options.c
-        pft/src/print.c
-        pft/src/show_disabled_postprocess.c
-        pft/src/test.c
-        pft/src/test.h
-        pft/src/unit_tests_indexed.c
-        pft/src/utils.c
-        pft/unit_tests.c
         floating.h
         ft_itoa_base.c
         ft_itoa_base_uns.c

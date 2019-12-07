@@ -75,21 +75,23 @@ int		print_modified_uns(t_integers data, t_format format, int base)
 		return (print_reverse_uns(data, format, count, base));
 	if ((format.flags & FLAG_SHARP) && data.ull != 0 && format.type != 'u')
 	{
-		format.width -= (format.type == 'o') ? 1 : 2;
-		format.width += (format.type == 'o' && format.precision != -1 && format.precision > count_digits_uns(data.ull, 8)) ? 1 : 0;
-		count += (format.flags & FLAG_ZERO && format.precision == -1) ? print_x(format, data) : 0;
+		format.width = get_unswidth(format, data);
+		count += (format.flags & FLAG_ZERO && format.precision == -1) \
+			? print_x(format, data) : 0;
 	}
 	if (format.width > format.precision)
 	{
-		while (format.width > ft_max(format.precision, count_digits_uns(data.ull, base)))
+		while (format.width > ft_max(format.precision, \
+		count_digits_uns(data.ull, base)))
 		{
-			ft_putchar(format.flags & FLAG_ZERO && format.precision == -1 ? '0' : ' ');
+			ft_putchar(format.flags & FLAG_ZERO &&
+			format.precision == -1 ? '0' : ' ');
 			format.width--;
 			count++;
 		}
 	}
-	if ((format.flags & FLAG_SHARP) && data.ull != 0 && !(format.flags & FLAG_ZERO && format.precision == -1))
-		count += print_x(format, data);
+	count += ((format.flags & FLAG_SHARP) && data.ull != 0 && !(format.flags \
+	& FLAG_ZERO && format.precision == -1)) ? print_x(format, data) : 0;
 	return (count + put_nbr_base(format, data, base, 1));
 }
 

@@ -37,22 +37,24 @@ int		print_modified_int(t_integers data, t_format format)
 	int		width;
 	int		flag;
 
-	flag = (format.width > count_digits(data.ll, 10) && (format.flags & FLAG_SPACE)) || (format.flags & FLAG_PLUS) || (is_neg(data.ll));
-	width = (format.flags & FLAG_PLUS) && format.precision == 0 && data.ll == 0 ? format.width + 1 : format.width;
-	count = 0;
+	flag = get_intflag(format, data);
+	width = get_intwidth(format, data);
 	if (format.flags & FLAG_MINUS)
-		return (print_reverse_int(data, format, count));
-	count += ((format.flags & FLAG_ZERO) && (format.width < format.precision || format.precision < 0)) ? print_sign(&data, &format) : 0;
+		return (print_reverse_int(data, format, 0));
+	count = ((format.flags & FLAG_ZERO) && (format.width < format.precision \
+		|| format.precision < 0)) ? print_sign(&data, &format) : 0;
 	if (width > format.precision)
 	{
-		while (width - flag > ft_max(format.precision, count_digits(data.ll, 10) - is_neg(data.ll)))
+		while (width - flag > ft_max(format.precision, \
+		count_digits(data.ll, 10) - is_neg(data.ll)))
 		{
-			ft_putchar((format.flags & FLAG_ZERO) && format.precision < 0 ? '0' : ' ');
+			ft_putchar((format.flags & FLAG_ZERO) && \
+			format.precision < 0 ? '0' : ' ');
 			width--;
 			count++;
 		}
 	}
-	count += !((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && (format.flags & FLAG_ZERO)) || (format.width >= format.precision && format.precision > -1) ? print_sign(&data, &format) : 0;
+	count += big_int_condition(&format, &data);
 	return (count + put_nbr_base(format, data, 10, 0));
 }
 

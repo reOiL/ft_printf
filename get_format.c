@@ -6,13 +6,13 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/16 14:36:50 by eblackbu          #+#    #+#             */
-/*   Updated: 2019/11/16 14:43:01 by eblackbu         ###   ########.fr       */
+/*   Updated: 2019/12/07 16:24:53 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int		get_flags(const char *str, int *it)
+unsigned int	get_flags(const char *str, int *it)
 {
 	unsigned int	res;
 
@@ -39,7 +39,7 @@ unsigned int		get_flags(const char *str, int *it)
 	return (res);
 }
 
-char				get_type(const char *str)
+char			get_type(const char *str)
 {
 	if (*str == 'c' || *str == 's' || *str == 'p')
 		return (*str);
@@ -53,7 +53,8 @@ char				get_type(const char *str)
 		return (0);
 }
 
-int					get_width(const char *str, int *i, va_list args, t_format *format)
+int				get_width(const char *str, \
+		int *i, va_list args, t_format *format)
 {
 	int				width;
 
@@ -79,7 +80,7 @@ int					get_width(const char *str, int *i, va_list args, t_format *format)
 	return (width);
 }
 
-int					get_precision(const char *str, int *i, va_list args)
+int				get_precision(const char *str, int *i, va_list args)
 {
 	int				precision;
 
@@ -91,7 +92,7 @@ int					get_precision(const char *str, int *i, va_list args)
 		{
 			precision = va_arg(args, int);
 			(*i)++;
-			return precision < 0 ? -1 : precision;
+			return (precision < 0 ? -1 : precision);
 		}
 		precision = 0;
 		while (ft_isdigit(*str))
@@ -105,32 +106,20 @@ int					get_precision(const char *str, int *i, va_list args)
 	return (precision);
 }
 
-int					get_modifier(const char *str, int *i)
+int				get_modifier(const char *str, int *i)
 {
-	if (*str == 'l')
+	if (*str == 'l' || *str == 'h' || *str == 'L')
 	{
 		(*i)++;
-		if (*(++str) == 'l')
+		if (*str == 'L')
+			return (MOD_LD);
+		if ((*(str + 1) == 'h' && *str == 'h') \
+				|| (*(str + 1) == 'l' && *str == 'l'))
 		{
 			(*i)++;
-			return (MOD_LL);
+			return (*str == 'h' ? MOD_HH : MOD_LL);
 		}
-		return (MOD_L);
-	}
-	else if (*str == 'h')
-	{
-		(*i)++;
-		if (*(++str) == 'h')
-		{
-			(*i)++;
-			return (MOD_HH);
-		}
-		return (MOD_H);
-	}
-	else if (*str == 'L')
-	{
-		(*i)++;
-		return (MOD_LD);
+		return (*str == 'h' ? MOD_H : MOD_L);
 	}
 	return (0);
 }
