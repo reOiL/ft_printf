@@ -38,7 +38,7 @@ int 	print_modified_int(t_integers data, t_format format)
 			count++;
 		}
 	}
-	count += !((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && format.width >= format.precision && (format.flags & FLAG_ZERO)) ? print_sign(&data, &format) : 0;
+	count += !((format.flags & FLAG_PLUS || format.flags & FLAG_SPACE) && (format.flags & FLAG_ZERO)) || (format.width >= format.precision && format.precision > -1) ? print_sign(&data, &format) : 0;
 	return (count + put_nbr_base(format, data, 10, 0));
 }
 
