@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:42:23 by jwebber           #+#    #+#             */
-/*   Updated: 2019/12/10 17:52:01 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/10/26 16:42:24 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int			print_value(t_format format, va_list args)
 		return (print_int(format, args));
 	else if (format.type == 'o' || format.type == 'u' ||\
 			format.type == 'x' || format.type == 'X')
-		return (print_int_unsigned(format, args));
+		return(print_int_unsigned(format, args));
 	else if (format.type == 'f')
-		return (print_float(format, args));
+		return(print_float(format, args));
 	return (0);
 }
 
@@ -95,10 +95,7 @@ int			ft_printf(const char *str, ...)
 		else if (str[i] == '{')
 			ft_printf2_c(str, &i, &printed_count);
 		else
-		{
-			ft_putchar(str[i++]);
-			printed_count++;
-		}
+			printed_count += ft_putchar_one(str[i++]);
 	}
 	va_end(args);
 	return (printed_count);

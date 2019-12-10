@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:42:23 by jwebber           #+#    #+#             */
-/*   Updated: 2019/12/07 15:38:56 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:27:44 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_format
 int						print_percent(t_format format);
 int						print_minus_string(t_format format, char *str,
 											long long length);
+int						ft_putchar_one(char c);
 int						print_char(t_format format, va_list args);
 int						print_string(t_format format, va_list args);
 long long				ft_max(long long a, long long b);
@@ -71,6 +72,10 @@ int						count_digits_uns(unsigned long long value, int base);
 int						put_nbr_base(t_format format, t_integers val, int base,
 										int uns_sign);
 int						check_zero_number(t_format format, t_integers val);
+int						get_intflag(t_format format, t_integers data);
+int						get_intwidth(t_format format, t_integers data);
+int						big_int_condition(t_format *format, t_integers *data);
+int						get_unswidth(t_format format, t_integers data);
 int						print_x(t_format format, t_integers data);
 char					*ft_tolower_str(char *str);
 int						print_reverse_uns(t_integers data, t_format format,

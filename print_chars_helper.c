@@ -6,11 +6,17 @@
 /*   By: eblackbu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 15:27:10 by eblackbu          #+#    #+#             */
-/*   Updated: 2019/12/07 15:30:01 by eblackbu         ###   ########.fr       */
+/*   Updated: 2019/12/07 16:27:10 by eblackbu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int			ft_putchar_one(char c)
+{
+	ft_putchar(c);
+	return (1);
+}
 
 int			ft_putstr_size(char *str, int precision)
 {
