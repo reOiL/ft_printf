@@ -6,7 +6,7 @@
 /*   By: jwebber <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 16:42:23 by jwebber           #+#    #+#             */
-/*   Updated: 2019/10/26 16:42:24 by jwebber          ###   ########.fr       */
+/*   Updated: 2019/12/10 17:52:01 by jwebber          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int			print_value(t_format format, va_list args)
 		return (print_int(format, args));
 	else if (format.type == 'o' || format.type == 'u' ||\
 			format.type == 'x' || format.type == 'X')
-		return(print_int_unsigned(format, args));
+		return (print_int_unsigned(format, args));
 	else if (format.type == 'f')
-		return(print_float(format, args));
+		return (print_float(format, args));
 	return (0);
 }
 
@@ -51,10 +51,37 @@ int			get_format(va_list args, const char *str, int *printed_count)
 	return (0);
 }
 
+void		ft_printf2(const char *str, va_list args, int *i, int *pcount)
+{
+	int		offset;
+
+	offset = get_format(args, &str[*i], pcount);
+	if (offset)
+		*i += offset;
+	else if (str[++(*i)])
+	{
+		ft_putchar(str[*i]);
+		(*pcount)++;
+	}
+}
+
+void		ft_printf2_c(const char *str, int *i, int *pcount)
+{
+	int		offset;
+
+	offset = colored(str + *i);
+	if (offset == 0)
+	{
+		ft_putchar(str[(*i)++]);
+		(*pcount)++;
+		return ;
+	}
+	(*i) += offset;
+}
+
 int			ft_printf(const char *str, ...)
 {
 	int		i;
-	int		offset;
 	int		printed_count;
 	va_list	args;
 
@@ -64,16 +91,9 @@ int			ft_printf(const char *str, ...)
 	while (str[i])
 	{
 		if (str[i] == '%')
-		{
-			offset = get_format(args, &str[i], &printed_count);
-			if (offset)
-				i += offset;
-			else if (str[++i])
-			{
-				ft_putchar(str[i]);
-				printed_count++;
-			}
-		}
+			ft_printf2(str, args, &i, &printed_count);
+		else if (str[i] == '{')
+			ft_printf2_c(str, &i, &printed_count);
 		else
 		{
 			ft_putchar(str[i++]);

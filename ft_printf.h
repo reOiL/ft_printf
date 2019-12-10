@@ -94,5 +94,6 @@ int						get_format(va_list args, const char *str,
 int						ft_printf(const char *format, ...);
 int						print_float(t_format format, va_list args);
 size_t					putchar_count(char c, size_t count);
+size_t					colored(const char *str);
 
 #endif
